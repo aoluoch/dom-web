@@ -48,7 +48,6 @@ const Navbar = () => {
     { name: "About Us", href: "/about" },
     { name: "Events", href: "/events" },
     { name: "Blog", href: "/blog" },
-    { name: "Membership", href: "membership" },
     { name: "Shop", href: "/shop" },
     { name: "Contact Us", href: "/contact" },
   ];

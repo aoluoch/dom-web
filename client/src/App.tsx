@@ -11,7 +11,7 @@ import Events from './Pages/Events'
 import Institute from './Pages/Institute'
 import Register from './Pages/Register'
 import Shop from './Pages/Shop'
-import Membership from './Pages/Membership'
+
 
 function App() {
   return (
@@ -26,7 +26,6 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/events" element={<Events />} />
             <Route path="/blog" element={<Blog />} />
-            <Route path="/membership" element={<Membership />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/register" element={<Register />} />
