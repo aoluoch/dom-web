@@ -149,6 +149,60 @@ const Hero = () => {
                     ))}
                   </div>
                 </div>
+              ) : slide.id === 1 ? (
+                /* Special compact layout for Grace Hour slide */
+                <div className="flex flex-col justify-center h-full">
+                  <div className="text-center max-w-4xl mx-auto">
+                    <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 leading-tight mb-2 sm:mb-3">
+                      {slide.title}
+                    </h1>
+                    {slide.subtitle && (
+                      <p className="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-gray-700 uppercase tracking-wide mb-2 sm:mb-3">
+                        {slide.subtitle}
+                      </p>
+                    )}
+
+                    {slide.schedule && (
+                      <p className="text-xs sm:text-sm md:text-base font-bold uppercase text-gray-800 tracking-wide mb-1 sm:mb-2">
+                        {slide.schedule}
+                      </p>
+                    )}
+
+                    {slide.times && (
+                      <p className="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed mb-3 sm:mb-4">
+                        {slide.times}
+                      </p>
+                    )}
+
+                    {slide.buttons && (
+                      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center mb-3 sm:mb-4">
+                        {slide.buttons.map((btn, i) => (
+                          <a
+                            key={i}
+                            href={btn.href}
+                            className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold shadow transition-all duration-200 ${btn.style}`}
+                          >
+                            {btn.label}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Grace Hour Image - Compact and centered */}
+                    {slide.img && (
+                      <div className="flex justify-center">
+                        <div className="relative w-full max-w-[200px] sm:max-w-[250px] md:max-w-[300px] lg:max-w-[350px]">
+                          <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg blur opacity-25"></div>
+                          <img
+                            src={slide.img}
+                            alt={slide.title}
+                            className="relative rounded-lg shadow-xl max-h-[120px] sm:max-h-[150px] md:max-h-[180px] lg:max-h-[200px] w-full object-cover"
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
               ) : (
                 /* Regular layout for other slides */
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-12 items-center">
