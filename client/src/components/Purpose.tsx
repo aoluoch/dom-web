@@ -8,28 +8,28 @@ const Purpose = () => {
       title: 'DOM FUTURE GEN',
       description: 'Helping all rounded future leaders know themselves and God.',
       icon: <Play className="w-6 h-6" />,
-      bgImage: 'https://images.pexels.com/photos/1674666/pexels-photo-1674666.jpeg?auto=compress&cs=tinysrgb&w=600',
+      bgImage: 'https://live.staticflickr.com/65535/54759682583_08982a927f_n.jpg',
     },
     {
       id: 2,
       title: 'DOM CARE',
       description: 'Offers help to communities in every way possible.',
       icon: <Heart className="w-6 h-6" />,
-      bgImage: 'https://images.pexels.com/photos/6994982/pexels-photo-6994982.jpeg?auto=compress&cs=tinysrgb&w=600',
+      bgImage: 'https://live.staticflickr.com/65535/54759685284_67fcf44d4d_n.jpg',
     },
     {
       id: 3,
       title: 'DOM MISSIONS',
       description: 'Preaching & teaching of the word of God.',
       icon: <Church className="w-6 h-6" />,
-      bgImage: 'https://images.pexels.com/photos/8468470/pexels-photo-8468470.jpeg?auto=compress&cs=tinysrgb&w=600',
+      bgImage: 'https://live.staticflickr.com/65535/54758600297_6a92f0b97f_n.jpg',
     },
     {
       id: 4,
       title: 'LEADERSHIP & TRAINING',
       description: 'Global leadership summits and trainings.',
       icon: <Users className="w-6 h-6" />,
-      bgImage: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600',
+      bgImage: 'https://live.staticflickr.com/65535/54759453736_9124160a80_z.jpg',
     }
   ];
 
@@ -62,13 +62,13 @@ const Purpose = () => {
               />
               
               {/* Dark Overlay */}
-              <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-50 transition-opacity duration-300" />
+              <div className="absolute inset-0 opacity-5 group-hover:bg-opacity-50 transition-opacity duration-300" />
               
               {/* Content */}
               <div className="absolute inset-0 flex flex-col justify-between p-6 text-white">
                 {/* Icon */}
                 <div className="flex justify-start">
-                  <div className="p-2 bg-white bg-opacity-20 rounded-full backdrop-blur-sm">
+                  <div className="p-2 rounded-full backdrop-blur-sm">
                     {card.icon}
                   </div>
                 </div>
@@ -78,7 +78,7 @@ const Purpose = () => {
                   <h3 className="text-xl font-bold uppercase tracking-wide leading-tight">
                     {card.title}
                   </h3>
-                  <p className="text-sm text-gray-200 leading-relaxed">
+                  <p className="text-sm text-white leading-relaxed">
                     {card.description}
                   </p>
                 </div>
