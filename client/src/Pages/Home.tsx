@@ -1,3 +1,4 @@
+import Friendship from "../components/Friendship"
 import Hero from "../components/Hero"
 import JoinLink from "../components/JoinLink"
 import Purpose from "../components/Purpose"
@@ -11,6 +12,7 @@ const Home = () => {
         <JoinLink />
         <Purpose />
         <Sermon />
+        <Friendship />
     </>
   )
 }
