@@ -1,11 +1,15 @@
 import Hero from "../components/Hero"
+import JoinLink from "../components/JoinLink"
+import Purpose from "../components/Purpose"
 
 
 const Home = () => {
   return (
-    <div>
+    <>
         <Hero />
-    </div>
+        <JoinLink />
+        <Purpose />
+    </>
   )
 }
 
