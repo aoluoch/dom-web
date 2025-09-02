@@ -73,6 +73,7 @@ export default function TestimonialCarousel() {
   const currentTestimonial = testimonials[currentIndex];
 
   return (
+    <>
     <div className="w-full max-w-6xl mx-auto px-4 py-16 bg-gray-50">
       {/* Title */}
       <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-16">
@@ -111,7 +112,7 @@ export default function TestimonialCarousel() {
               <h3 className="text-xl md:text-2xl font-semibold text-gray-800 mb-2">
                 {currentTestimonial.name}
               </h3>
-              <blockquote className="text-gray-600 text-lg leading-relaxed italic">
+              <blockquote className="text-gray-600 text-lg leading-relaxed">
                 "{currentTestimonial.text}"
               </blockquote>
             </div>
@@ -134,5 +135,8 @@ export default function TestimonialCarousel() {
         ))}
       </div>
     </div>
+    {/* Divider line at the bottom */}
+    <div className="mt-16 border-t border-gray-300"></div>
+    </>
   );
 }

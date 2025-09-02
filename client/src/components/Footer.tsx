@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-50 py-12 mt-auto">
+    <footer className="bg-gray-50 py-2 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Logo Section */}
         <div className="mb-12 flex items-center">
@@ -23,31 +23,31 @@ const Footer = () => {
             <h3 className="text-lg font-semibold text-gray-800 mb-6">Departments</h3>
             <ul className="space-y-3">
               <li>
-                <Link to="/departments/care" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
+                <Link to="/departments" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
                   <span className="text-gray-400 mr-2">›</span>
                   DOM Care
                 </Link>
               </li>
               <li>
-                <Link to="/departments/media" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
+                <Link to="/departments" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
                   <span className="text-gray-400 mr-2">›</span>
                   DOM Media
                 </Link>
               </li>
               <li>
-                <Link to="/departments/missions" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
+                <Link to="/departments" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
                   <span className="text-gray-400 mr-2">›</span>
                   DOM Missions
                 </Link>
               </li>
               <li>
-                <Link to="/departments/publishing" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
+                <Link to="/departments" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
                   <span className="text-gray-400 mr-2">›</span>
                   DOM Publishing
                 </Link>
               </li>
               <li>
-                <Link to="/departments/future-generations" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
+                <Link to="/departments" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
                   <span className="text-gray-400 mr-2">›</span>
                   DOM Future Generations
                 </Link>
