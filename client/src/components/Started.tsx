@@ -8,7 +8,7 @@ const Started: React.FC = () => {
       <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `linear-gradient(rgba(255, 140, 0, 0.25), rgba(255, 20, 147, 0.25)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')`,
+            backgroundImage: `linear-gradient(rgba(255, 140, 0, 0.25), rgba(255, 20, 147, 0.25)), url('https://live.staticflickr.com/65535/54760424940_752d5a0b67.jpg')`,
           }}
       >
         {/* Animated background elements for depth */}

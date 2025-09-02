@@ -33,7 +33,7 @@ const Friendship: React.FC = () => {
           <div className="relative">
             <div className="aspect-[4/3] rounded-sm overflow-hidden shadow-2xl">
               <img
-                src="https://images.pexels.com/photos/1157557/pexels-photo-1157557.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src="https://live.staticflickr.com/65535/54760310858_6d1999a932_h.jpg"
                 alt="People sitting together in friendship"
                 className="w-full h-full object-cover rounded-sm"
               />

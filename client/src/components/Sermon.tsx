@@ -22,7 +22,7 @@ const Sermon: React.FC = () => {
                 <p className="text-sm font-medium text-gray-700 mb-3">
                   Subscribe:
                 </p>
-                <a href="https://www.youtube.com/@YourChannelName?sub_confirmation=1" //replace with your channel link
+                <a href="https://youtube.com/@prophetdavidowusu4328?si=DIMrmud1CV603IPA" //replace with your channel link
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center w-10 h-10 bg-red-600 rounded-lg hover:bg-red-700 transition-colors"
@@ -39,12 +39,13 @@ const Sermon: React.FC = () => {
             <div className="relative aspect-video bg-black rounded-lg overflow-hidden">
               <iframe
                 className="w-full h-full"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                src="https://www.youtube.com/embed/y_UVGBUMSLo"
                 title="PROPHET DAVID OWUSU | TEN 10 DECEPTIONS OF THE DEVIL"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               ></iframe>
+
             </div>
           </div>
 
@@ -53,7 +54,7 @@ const Sermon: React.FC = () => {
             <div className="space-y-4 text-center lg:text-left">
               <p className="text-sm font-medium text-gray-600">More Episodes</p>
               <a
-                href="https://www.youtube.com/@YourChannelName" 
+                href="https://youtu.be/y_UVGBUMSLo?si=UX5ycEZGkaeVSk6J" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center space-x-2 text-gray-800 font-semibold hover:text-gray-900 transition-colors group"
