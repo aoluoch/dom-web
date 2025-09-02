@@ -8,7 +8,8 @@ import type {
   EntryFieldTypes,
   EntrySkeletonType,
 } from "contentful"
-import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import type { Document } from "@contentful/rich-text-types"
 
 interface DepartmentSkeleton extends EntrySkeletonType {
   contentTypeId: "department"
@@ -74,9 +75,8 @@ const DepartmentDetail = () => {
     const asset = imageId ? assetsMap[imageId] : undefined
     const rawUrl = getFirstLocaleString((asset as Asset | undefined)?.fields?.file?.url)
     const imageUrl = rawUrl ? (rawUrl.startsWith("http") ? rawUrl : `https:${rawUrl}`) : undefined
-    const descriptionDoc = (entry.fields.description as any) || undefined
-    const descriptionText: string | undefined = descriptionDoc ? documentToPlainTextString(descriptionDoc) : undefined
-    return { title, imageUrl, descriptionText }
+    const descriptionDoc = (entry.fields.description as Document) || undefined
+    return { title, imageUrl, descriptionDoc }
   }, [entry, assetsMap])
 
   if (loading) {
@@ -124,8 +124,10 @@ const DepartmentDetail = () => {
         </div>
 
         <div className="w-full">
-          {view.descriptionText && (
-            <p className="text-lg text-gray-700 leading-relaxed whitespace-pre-line">{view.descriptionText}</p>
+          {view.descriptionDoc && (
+            <div className="prose max-w-none text-gray-700 leading-relaxed">
+              {documentToReactComponents(view.descriptionDoc)}
+            </div>
           )}
         </div>
       </div>

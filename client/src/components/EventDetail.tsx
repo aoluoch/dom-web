@@ -8,7 +8,7 @@ import type {
   EntryFieldTypes,
   EntrySkeletonType,
 } from "contentful"
-import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import type { Document } from "@contentful/rich-text-types"
 
 interface EventSkeleton extends EntrySkeletonType {
@@ -77,8 +77,7 @@ const EventDetail = () => {
     const rawUrl = getFirstLocaleString((asset as Asset | undefined)?.fields?.file?.url)
     const imageUrl = rawUrl ? (rawUrl.startsWith("http") ? rawUrl : `https:${rawUrl}`) : undefined
     const descriptionDoc = entry.fields.description as Document | undefined
-    const descriptionText: string | undefined = descriptionDoc ? documentToPlainTextString(descriptionDoc) : undefined
-    return { title, imageUrl, descriptionText }
+    return { title, imageUrl, descriptionDoc }
   }, [entry, assetsMap])
 
   if (loading) {
@@ -126,10 +125,12 @@ const EventDetail = () => {
         </div>
 
         <div className="w-full">
-          {view.descriptionText && (
+          {view.descriptionDoc && (
             <div>
               <h2 className="text-xl font-semibold text-gray-800 mb-3">Event Details</h2>
-              <p className="text-lg text-gray-700 leading-relaxed whitespace-pre-line">{view.descriptionText}</p>
+              <div className="prose max-w-none text-gray-700 leading-relaxed">
+                {documentToReactComponents(view.descriptionDoc)}
+              </div>
             </div>
           )}
         </div>
