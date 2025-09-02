@@ -1,11 +1,17 @@
+import Cover from "../components/Cover"
+
+
 const Institute = () => {
   return (
+    <>
+    <Cover 
+    title="DOM Institute"
+    subtitle="Learn more about DOM Institute's educational programs and courses."/>
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-6">DOM Institute</h1>
-      <p className="text-lg text-gray-700">
-        Learn more about DOM Institute's educational programs and courses.
-      </p>
+      
     </div>
+    <div className="mt-16 border-t border-gray-300"></div>
+    </>
   )
 }
 
