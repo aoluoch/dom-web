@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-50 py-2 mt-auto">
+    <footer className="bg-gray-50 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Logo Section */}
-        <div className="mb-12 flex items-center">
+        <div className="mb-5 flex items-center mt-10">
             <img 
                 src="https://live.staticflickr.com/65535/54759772729_19d90458b3_m.jpg"
                 alt="David Owusu Ministries Logo" 

@@ -11,6 +11,7 @@ const Departments = () => {
     <div className="container mx-auto px-4 py-8">
       <DepartmentComponent />
     </div>
+    <div className="mt-16 border-t border-gray-300"></div>
     </>
   )
 }
