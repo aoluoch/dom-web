@@ -232,7 +232,7 @@ const Hero = () => {
                           <img
                             src={slide.img}
                             alt={slide.title}
-                            className="relative rounded-2xl shadow-2xl w-full h-auto object-cover max-h-[300px] sm:max-h-[400px] md:max-h-[500px] lg:max-h-[60%]"
+                            className="relative rounded-2xl shadow-2xl w-full h-auto object-cover max-h-[300px] sm:max-h-[400px] md:max-h-[500px] lg:max-h-[600px]"
                             loading="lazy"
                           />
                         </div>
