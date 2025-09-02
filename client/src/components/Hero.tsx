@@ -228,11 +228,11 @@ const Hero = () => {
                     {slide.img && (
                       <div className="flex justify-center items-center order-1 lg:order-2">
                         <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
-                          <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl blur opacity-20"></div>
+                          <div className="absolute rounded-2xl"></div>
                           <img
                             src={slide.img}
                             alt={slide.title}
-                            className="relative rounded-2xl shadow-2xl w-full h-auto object-cover max-h-[300px] sm:max-h-[400px] md:max-h-[500px] lg:max-h-[600px]"
+                            className="relative rounded-2xl shadow-2xl w-full h-auto object-cover max-h-[300px] sm:max-h-[400px] md:max-h-[500px] lg:max-h-[60%]"
                             loading="lazy"
                           />
                         </div>
