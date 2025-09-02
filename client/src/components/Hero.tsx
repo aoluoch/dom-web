@@ -1,23 +1,27 @@
 import { useState, useEffect } from "react";
-// Import flag images
-import botswanaFlag from "../assets/flags/botswana.jpg";
-import canadaFlag from "../assets/flags/canada.jpg";
-import germanyFlag from "../assets/flags/germany.jpg";
-import ghanaFlag from "../assets/flags/ghana.jpg";
-import indiaFlag from "../assets/flags/india.jpg";
-import kenyaFlag from "../assets/flags/kenya.jpg";
-import nigeriaFlag from "../assets/flags/nigeria.jpg";
-import sierraLeoneFlag from "../assets/flags/siera-leone.jpg";
-import southAfricaFlag from "../assets/flags/south-Africa.jpg";
-import stVincentFlag from "../assets/flags/st-vincent.jpg";
-import uaeFlag from "../assets/flags/united-arab-emirates.jpg";
-import ukFlag from "../assets/flags/united-kingdom.jpg";
-import usFlag from "../assets/flags/united-states.jpg";
-import zambiaFlag from "../assets/flags/zambia.jpg";
-import zimbabweFlag from "../assets/flags/zimbabwe.jpg";
+import { Link } from "react-router-dom";
 
-// Import grace hour image
-import graceHourImage from "../assets/flags/grace hour.jpeg";
+// Use external flag images from a reliable CDN
+const flagImages = {
+  botswana: "https://flagcdn.com/w320/bw.jpg",
+  canada: "https://flagcdn.com/w320/ca.jpg", 
+  germany: "https://flagcdn.com/w320/de.jpg",
+  ghana: "https://flagcdn.com/w320/gh.jpg",
+  india: "https://flagcdn.com/w320/in.jpg",
+  kenya: "https://flagcdn.com/w320/ke.jpg",
+  nigeria: "https://flagcdn.com/w320/ng.jpg",
+  sierraLeone: "https://flagcdn.com/w320/sl.jpg",
+  southAfrica: "https://flagcdn.com/w320/za.jpg",
+  stVincent: "https://flagcdn.com/w320/vc.jpg",
+  uae: "https://flagcdn.com/w320/ae.jpg",
+  uk: "https://flagcdn.com/w320/gb.jpg",
+  us: "https://flagcdn.com/w320/us.jpg",
+  zambia: "https://flagcdn.com/w320/zm.jpg",
+  zimbabwe: "https://flagcdn.com/w320/zw.jpg",
+};
+
+// Grace hour image placeholder
+const graceHourImage = "https://live.staticflickr.com/65535/54760431206_c1a082eeb8_n.jpg";
 
 const slides = [
   {
@@ -50,7 +54,7 @@ const slides = [
         time: "9.30am (EAT), 8.30am (SAST), 7.30am (BST), 6.30am (GMT), 2.30am (EDT), 1.30am (CDT)",
       },
       {
-        title: "EVENING SERVICE",
+        title: "EVENING SERVICE", 
         time: "10.00pm (EAT), 9.00pm (SAST), 8.00pm (BST), 7.00pm (GMT), 3.00pm (EDT), 2.00pm (CDT)",
       },
     ],
@@ -62,7 +66,7 @@ const slides = [
       },
       {
         label: "Find out more →",
-        href: "/about-dom",
+        href: "/about",
         style: "bg-white text-gray-800 border hover:bg-gray-100",
       },
     ],
@@ -72,21 +76,21 @@ const slides = [
     title: "Global Presence",
     subtitle: "We are present in these countries. Expanding every day.",
     countries: [
-      { name: "botswana", flag: botswanaFlag },
-      { name: "canada", flag: canadaFlag },
-      { name: "germany", flag: germanyFlag },
-      { name: "ghana", flag: ghanaFlag },
-      { name: "india", flag: indiaFlag },
-      { name: "kenya", flag: kenyaFlag },
-      { name: "nigeria", flag: nigeriaFlag },
-      { name: "sierra-leone", flag: sierraLeoneFlag },
-      { name: "south-africa", flag: southAfricaFlag },
-      { name: "st-vincent", flag: stVincentFlag },
-      { name: "united-arab-emirates", flag: uaeFlag },
-      { name: "united-kingdom", flag: ukFlag },
-      { name: "united-states", flag: usFlag },
-      { name: "zambia", flag: zambiaFlag },
-      { name: "zimbabwe", flag: zimbabweFlag },
+      { name: "botswana", flag: flagImages.botswana },
+      { name: "canada", flag: flagImages.canada },
+      { name: "germany", flag: flagImages.germany },
+      { name: "ghana", flag: flagImages.ghana },
+      { name: "india", flag: flagImages.india },
+      { name: "kenya", flag: flagImages.kenya },
+      { name: "nigeria", flag: flagImages.nigeria },
+      { name: "sierra leone", flag: flagImages.sierraLeone },
+      { name: "south africa", flag: flagImages.southAfrica },
+      { name: "st vincent", flag: flagImages.stVincent },
+      { name: "united arab emirates", flag: flagImages.uae },
+      { name: "united kingdom", flag: flagImages.uk },
+      { name: "united states", flag: flagImages.us },
+      { name: "zambia", flag: flagImages.zambia },
+      { name: "zimbabwe", flag: flagImages.zimbabwe },
     ],
   },
 ];
@@ -104,7 +108,7 @@ const Hero = () => {
 
   return (
     <section 
-      className="relative w-full overflow-hidden h-[88svh] sm:h-[92svh] md:h-screen"
+      className="relative w-full overflow-hidden min-h-screen"
       style={{
         backgroundImage: `url(https://live.staticflickr.com/65535/54759275817_f60450ea78_z.jpg)`,
         backgroundSize: 'cover',
@@ -112,9 +116,11 @@ const Hero = () => {
         backgroundRepeat: 'no-repeat'
       }}
     >
-      <div className="absolute inset-0 bg-black/40 z-10"></div>
-      {/* Slides */}
-      <div className="relative h-full">
+      {/* Dark overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/50 z-10"></div>
+      
+      {/* Slides Container */}
+      <div className="relative h-full min-h-screen">
         {slides.map((slide, index) => (
           <div
             key={slide.id}
@@ -122,177 +128,236 @@ const Hero = () => {
               index === current ? "opacity-100 z-20" : "opacity-0 z-10"
             }`}
           >
-            {/* Content */}
-            <div className="max-w-7xl mx-auto h-full flex flex-col justify-end px-4 sm:px-6 lg:px-8 xl:px-12">
-              {/* Special layout for Global Presence slide */}
+            {/* Content Container */}
+            <div className="h-full min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+              
+              {/* Global Presence Slide */}
               {slide.countries ? (
-                <div className="text-center pb-16 sm:pb-16 lg:pb-20">
-                  <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6 drop-shadow-lg">
+                <div className="text-center w-full max-w-7xl mx-auto">
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-3 sm:mb-5 lg:mb-6 drop-shadow-2xl">
                     {slide.title}
                   </h1>
                   {slide.subtitle && (
-                    <p className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-white uppercase tracking-wide mb-8 sm:mb-10 drop-shadow-lg">
+                    <p className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-white uppercase tracking-wide mb-6 sm:mb-8 lg:mb-10 drop-shadow-lg">
                       {slide.subtitle}
                     </p>
                   )}
                   
-                  {/* Countries Grid */}
-                  <div className="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 xl:grid-cols-8 gap-2 sm:gap-4 md:gap-5 max-w-5xl mx-auto">
+                  {/* Countries Grid - Fully Responsive */}
+                  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-3 sm:gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto">
                     {slide.countries.map((country, i) => (
                       <div
                         key={i}
-                        className="flex flex-col items-center text-center group"
+                        className="flex flex-col items-center text-center group cursor-pointer"
                       >
-                        <div className="relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:shadow-xl">
+                        <div className="relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl bg-white p-1">
                           <img
                             src={country.flag}
                             alt={country.name}
-                            className="w-12 h-9 sm:w-14 sm:h-10 md:w-16 md:h-12 lg:w-20 lg:h-14 xl:w-24 xl:h-16 object-cover"
+                            className="w-12 h-8 sm:w-16 sm:h-10 md:w-20 md:h-12 lg:w-24 lg:h-16 xl:w-28 xl:h-18 object-cover rounded"
+                            loading="lazy"
                           />
                         </div>
-                        <p className="mt-2 text-xs font-bold uppercase text-white leading-tight drop-shadow-md">
-                          {country.name.replace("-", " ")}
+                        <p className="mt-2 sm:mt-3 text-xs sm:text-sm md:text-base font-bold uppercase text-white leading-tight drop-shadow-md text-center">
+                          {country.name}
                         </p>
                       </div>
                     ))}
                   </div>
                 </div>
-              ) : slide.id === 1 ? (
-                /* Enhanced layout for Grace Hour slide */
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center h-full">
-                {/* Left Side - Text */}
-                <div className="flex flex-col justify-center text-center lg:text-left max-w-3xl mx-auto px-4">
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-3 sm:mb-4 drop-shadow-lg">
-                    {slide.title}
-                    </h1>
+              ) 
+              
+              /* Grace Hour Slide - Enhanced Responsive Layout */
+              : slide.id === 1 ? (
+                <div className="w-full max-w-7xl mx-auto">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
+                    {/* Left Side - Text Content */}
+                    <div className="text-center lg:text-left space-y-4 sm:space-y-6 order-2 lg:order-1">
+                      <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight drop-shadow-2xl">
+                        {slide.title}
+                      </h1>
 
-                    {slide.subtitle && (
-                    <p className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-white uppercase tracking-wide mb-3 sm:mb-4 drop-shadow-lg">
-                        {slide.subtitle}
-                    </p>
-                    )}
+                      {slide.subtitle && (
+                        <p className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-white uppercase tracking-wide drop-shadow-lg">
+                          {slide.subtitle}
+                        </p>
+                      )}
 
-                    {slide.schedule && (
-                    <p className="text-sm sm:text-base md:text-lg font-bold uppercase text-white tracking-wide mb-2 sm:mb-3 drop-shadow-lg">
-                        {slide.schedule}
-                    </p>
-                    )}
+                      {slide.schedule && (
+                        <p className="text-base sm:text-lg md:text-xl font-bold uppercase text-yellow-300 tracking-wide drop-shadow-lg">
+                          {slide.schedule}
+                        </p>
+                      )}
 
-                    {slide.times && (
-                    <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white leading-relaxed mb-6 sm:mb-8 drop-shadow-lg">
-                        {slide.times}
-                    </p>
-                    )}
+                      {slide.times && (
+                        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6">
+                          <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white leading-relaxed drop-shadow-lg">
+                            {slide.times}
+                          </p>
+                        </div>
+                      )}
 
-                    {slide.buttons && (
-                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-6 sm:mb-8">
-                        {slide.buttons.map((btn, i) => (
-                        <a
-                            key={i}
-                            href={btn.href}
-                            className={`px-4 sm:px-6 py-3 sm:py-3 rounded-lg text-sm sm:text-base font-semibold shadow-lg transition-all duration-200 ${btn.style}`}
-                        >
-                            {btn.label}
-                        </a>
-                        ))}
+                      {slide.buttons && (
+                        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start pt-2 sm:pt-4">
+                          {slide.buttons.map((btn, i) => (
+                            btn.href && btn.href.startsWith('/') ? (
+                              <Link
+                                key={i}
+                                to={btn.href}
+                                className={`px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-base sm:text-lg font-bold shadow-xl transition-all duration-300 transform hover:scale-105 ${btn.style}`}
+                              >
+                                {btn.label}
+                              </Link>
+                            ) : (
+                              <a
+                                key={i}
+                                href={btn.href}
+                                className={`px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-base sm:text-lg font-bold shadow-xl transition-all duration-300 transform hover:scale-105 ${btn.style}`}
+                                target={btn.href?.startsWith('http') ? '_blank' : undefined}
+                                rel={btn.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+                              >
+                                {btn.label}
+                              </a>
+                            )
+                          ))}
+                        </div>
+                      )}
                     </div>
-                    )}
-                    </div>
 
-                {/* Right Side - Grace Hour Image */}
-                {slide.img && (
-                    <div className="flex justify-center lg:justify-end items-center px-4">
-                    <div className="relative w-full max-w-[300px] sm:max-w-[380px] md:max-w-[450px] lg:max-w-[520px] xl:max-w-[560px]">
-                        <div className="absolute  rounded-xl blur-sm opacity-30"></div>
-                        <img
-                        src={slide.img}
-                        alt={slide.title}
-                        className="relative rounded-xl shadow-2xl w-full h-auto object-contain"
-                        />
-                    </div>
-                    </div>
-                )}
-            </div>
-
-              ) : (
-                /* Enhanced layout for other slides */
-                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center ${slide.services ? 'pb-16 sm:pb-20 lg:pb-24' : ''}` }>
-                  <div className="text-center lg:text-left">
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight drop-shadow-lg">
-                      {slide.title}
-                    </h1>
-                    {slide.subtitle && (
-                      <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-white uppercase tracking-wide drop-shadow-lg">
-                        {slide.subtitle}
-                      </p>
-                    )}
-
-                    {slide.schedule && (
-                      <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg font-bold uppercase text-white tracking-wide drop-shadow-lg">
-                        {slide.schedule}
-                      </p>
-                    )}
-
-                    {slide.times && (
-                      <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base lg:text-lg text-white leading-relaxed drop-shadow-lg">
-                        {slide.times}
-                      </p>
-                    )}
-
-                    {slide.details && (
-                      <div className="mt-4 sm:mt-5 flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-8 text-xs sm:text-sm font-bold uppercase text-white justify-center lg:justify-start drop-shadow-lg">
-                        {slide.details.map((d, i) => (
-                          <span key={i} className="whitespace-nowrap bg-white text-gray-800 px-3 py-1 rounded-lg">
-                            {d.label}: {d.value}
-                          </span>
-                        ))}
+                    {/* Right Side - Grace Hour Image */}
+                    {slide.img && (
+                      <div className="flex justify-center items-center order-1 lg:order-2">
+                        <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
+                          <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl blur opacity-20"></div>
+                          <img
+                            src={slide.img}
+                            alt={slide.title}
+                            className="relative rounded-2xl shadow-2xl w-full h-auto object-cover max-h-[300px] sm:max-h-[400px] md:max-h-[500px] lg:max-h-[600px]"
+                            loading="lazy"
+                          />
+                        </div>
                       </div>
                     )}
+                  </div>
+                </div>
+              ) 
+              
+              /* Sunday Service Slide - Enhanced Layout */
+              : (
+                <div className="w-full max-w-7xl mx-auto">
+                  <div className="text-center space-y-6 sm:space-y-8 lg:space-y-10">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight drop-shadow-2xl">
+                      {slide.title}
+                    </h1>
+                    
+                    {slide.subtitle && (
+                      <p className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-white uppercase tracking-wide drop-shadow-lg">
+                        {slide.subtitle}
+                      </p>
+                    )}
 
-                    {slide.services && (
-                      <div className="mt-5 sm:mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
-                        {slide.services.map((s, i) => (
-                          <div key={i} className="text-center sm:text-left bg-white p-4 rounded-lg">
-                            <h5 className="text-sm sm:text-base md:text-lg font-bold text-gray-800">{s.title}</h5>
-                            <p className="text-xs sm:text-sm text-gray-600 mt-2">{s.time}</p>
+                    {/* Meeting Details */}
+                    {slide.details && (
+                      <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center items-center">
+                        {slide.details.map((detail, i) => (
+                          <div key={i} className="bg-white/90 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-lg shadow-lg">
+                            <span className="text-sm sm:text-base md:text-lg font-bold text-gray-800">
+                              {detail.label}: <span className="text-blue-600">{detail.value}</span>
+                            </span>
                           </div>
                         ))}
                       </div>
                     )}
 
+                    {/* Service Times */}
+                    {slide.services && (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+                        {slide.services.map((service, i) => (
+                          <div key={i} className="bg-white/95 backdrop-blur-sm p-6 sm:p-8 rounded-xl shadow-xl border border-white/20">
+                            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-3 sm:mb-4">
+                              {service.title}
+                            </h3>
+                            <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed">
+                              {service.time}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Action Buttons */}
                     {slide.buttons && (
-                      <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center lg:justify-start">
+                      <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center pt-4 sm:pt-6">
                         {slide.buttons.map((btn, i) => (
-                          <a
-                            key={i}
-                            href={btn.href}
-                            className={`px-5 sm:px-6 py-3 sm:py-4 rounded-lg text-sm sm:text-base font-semibold shadow-lg transition-all duration-200 ${btn.style}`}
-                          >
-                            {btn.label}
-                          </a>
+                          btn.href && btn.href.startsWith('/') ? (
+                            <Link
+                              key={i}
+                              to={btn.href}
+                              className={`px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-base sm:text-lg font-bold shadow-xl transition-all duration-300 transform hover:scale-105 min-w-[140px] sm:min-w-[160px] ${btn.style}`}
+                            >
+                              {btn.label}
+                            </Link>
+                          ) : (
+                            <a
+                              key={i}
+                              href={btn.href}
+                              className={`px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-base sm:text-lg font-bold shadow-xl transition-all duration-300 transform hover:scale-105 min-w-[140px] sm:min-w-[160px] ${btn.style}`}
+                              target={btn.href?.startsWith('http') ? '_blank' : undefined}
+                              rel={btn.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+                            >
+                              {btn.label}
+                            </a>
+                          )
                         ))}
                       </div>
                     )}
                   </div>
-
-                  {/* Image */}
-                  {slide.img && (
-                    <div className="flex justify-center items-center h-full mt-8 lg:mt-0">
-                      <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl">
-                        <div className="absolute -inset-2"></div>
-                        <img
-                          src={slide.img}
-                          alt={slide.title}
-                          className="relative rounded-xl shadow-2xl max-h-[320px] sm:max-h-[380px] md:max-h-[440px] lg:max-h-[500px] w-full object-cover"
-                        />
-                      </div>
-                    </div>
-                  )}
                 </div>
               )}
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Slide Indicators */}
+      <div className="absolute bottom-3 sm:bottom-5 lg:bottom-6 left-1/2 transform -translate-x-1/2 z-30">
+        <div className="flex space-x-1.5 sm:space-x-2">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrent(index)}
+              className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
+                index === current
+                  ? "bg-white shadow-lg scale-110"
+                  : "bg-white/50 hover:bg-white/75"
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Navigation Arrows for larger screens */}
+      <div className="hidden md:block">
+        <button
+          onClick={() => setCurrent((prev) => (prev - 1 + slides.length) % slides.length)}
+          className="absolute left-3 lg:left-6 top-1/2 transform -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-1.5 lg:p-2 rounded-full transition-all duration-300"
+          aria-label="Previous slide"
+        >
+          <svg className="w-4 h-4 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        
+        <button
+          onClick={() => setCurrent((prev) => (prev + 1) % slides.length)}
+          className="absolute right-3 lg:right-6 top-1/2 transform -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-1.5 lg:p-2 rounded-full transition-all duration-300"
+          aria-label="Next slide"
+        >
+          <svg className="w-4 h-4 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
       </div>
     </section>
   );
