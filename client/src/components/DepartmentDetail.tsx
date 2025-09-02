@@ -105,6 +105,7 @@ const DepartmentDetail = () => {
   }
 
   return (
+    <>
     <div className="container mx-auto px-4 py-8">
       <div className="mb-6">
         <Link to="/departments" className="text-blue-600 hover:underline">← Back to Departments</Link>
@@ -129,6 +130,8 @@ const DepartmentDetail = () => {
         </div>
       </div>
     </div>
+    <div className="mt-16 border-t border-gray-300"></div>
+    </>
   )
 }
 
