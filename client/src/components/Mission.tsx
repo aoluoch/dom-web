@@ -4,25 +4,23 @@ import type {
   Asset,
   Entry,
   EntryCollection,
-  EntryFieldTypes,
   EntrySkeletonType,
+  EntryFieldTypes,
 } from "contentful"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import type { Document } from "@contentful/rich-text-types"
-import Values from "./Values"
-import Mission from "./Mission"
 
-interface AboutSkeleton extends EntrySkeletonType {
-  contentTypeId: "about"
+interface MissionSkeleton extends EntrySkeletonType {
+  contentTypeId: "mission"
   fields: {
-    name?: EntryFieldTypes.Symbol
+    title: EntryFieldTypes.Symbol
     image: EntryFieldTypes.AssetLink
     description: EntryFieldTypes.RichText
   }
 }
 
-const Abt = () => {
-  const [about, setAbout] = useState<Entry<AboutSkeleton> | null>(null)
+const Mission = () => {
+  const [mission, setMission] = useState<Entry<MissionSkeleton> | null>(null)
   const [assetsMap, setAssetsMap] = useState<Record<string, Asset>>({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -31,8 +29,8 @@ const Abt = () => {
     let isMounted = true
     setLoading(true)
     client
-      .getEntries<AboutSkeleton>({ content_type: "about", include: 2, limit: 1 })
-      .then((response: EntryCollection<AboutSkeleton>) => {
+      .getEntries<MissionSkeleton>({ content_type: "mission", include: 2, limit: 1 })
+      .then((response: EntryCollection<MissionSkeleton>) => {
         if (!isMounted) return
         const item = response.items?.[0] ?? null
         const assets = (response.includes?.Asset ?? []) as Asset[]
@@ -41,12 +39,12 @@ const Abt = () => {
           const id = (a as Asset).sys?.id as string | undefined
           if (id) map[id] = a
         })
-        setAbout(item)
+        setMission(item)
         setAssetsMap(map)
       })
       .catch((e: unknown) => {
         if (!isMounted) return
-        const message = e instanceof Error ? e.message : "Failed to load about content"
+        const message = e instanceof Error ? e.message : "Failed to load mission content"
         setError(message)
       })
       .finally(() => {
@@ -74,21 +72,21 @@ const Abt = () => {
   }
 
   const { title, imageUrl, description } = useMemo(() => {
-    if (!about) return { title: "About", imageUrl: undefined as string | undefined, description: null as Document | null }
-    const nameVal = about.fields.name
-    const titleText = getFirstLocaleString(nameVal) ?? "About"
-    const imageId = getLinkId(about.fields.image)
+    if (!mission) return { title: "Our Mission", imageUrl: undefined as string | undefined, description: null as Document | null }
+    const titleVal = mission.fields.title
+    const titleText = getFirstLocaleString(titleVal) ?? "Our Mission"
+    const imageId = getLinkId(mission.fields.image)
     const asset = imageId ? assetsMap[imageId] : undefined
     const rawUrl = getFirstLocaleString(asset?.fields?.file?.url)
     const imgUrl = rawUrl ? (rawUrl.startsWith("http") ? rawUrl : `https:${rawUrl}`) : undefined
-    const descDoc = (about.fields.description as unknown as Document) ?? null
+    const descDoc = (mission.fields.description as unknown as Document) ?? null
     return { title: titleText, imageUrl: imgUrl, description: descDoc }
-  }, [about, assetsMap])
+  }, [mission, assetsMap])
 
   if (loading) {
     return (
       <div className="py-8">
-        <p className="text-gray-600">Loading about content...</p>
+        <p className="text-gray-600">Loading mission content...</p>
       </div>
     )
   }
@@ -101,46 +99,48 @@ const Abt = () => {
     )
   }
 
-  if (!about) {
+  if (!mission) {
     return (
       <div className="py-8">
-        <p className="text-gray-600">No about content found.</p>
+        <p className="text-gray-600">No mission content found.</p>
       </div>
     )
   }
 
   return (
-    <>
-      <section className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                  {/* Image */}
-        <div className="w-full h-full">
+    <section className="max-w-6xl mx-auto py-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        {/* Image */}
+        <div className="w-full h-full order-2 lg:order-1">
           {imageUrl ? (
             <img
               src={`${imageUrl}?w=1200&fit=pad&fm=jpg&q=85&bg=rgb:ffffff`}
               alt={title}
-              className="w-full h-full rounded-md shadow-md object-cover bg-white"
+              className="w-full h-full rounded-lg shadow-lg object-cover"
               loading="lazy"
             />
           ) : (
-            <div className="w-full h-full bg-gray-100 rounded-md" />
+            <div className="w-full h-full bg-gray-100 rounded-lg" />
           )}
         </div>
 
-          {/* Description */}
-          <div className="prose max-w-none">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">{title}</h2>
-            {description ? documentToReactComponents(description) : null}
+        {/* Content */}
+        <div className="order-1 lg:order-2">
+          <div className="flex items-start gap-4 mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+              {title}
+            </h2>
           </div>
+          
+          {description && (
+            <div className="prose prose-lg max-w-none text-gray-700">
+              {documentToReactComponents(description)}
+            </div>
+          )}
         </div>
-      </section>
-      
-      <Values />
-      <Mission />
-    </>
+      </div>
+    </section>
   )
 }
 
-export default Abt
-
-
+export default Mission
