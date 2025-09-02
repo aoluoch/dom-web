@@ -9,6 +9,7 @@ import type {
 } from "contentful"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import type { Document } from "@contentful/rich-text-types"
+import { BLOCKS } from "@contentful/rich-text-types"
 import Values from "./Values"
 import Mission from "./Mission"
 
@@ -130,7 +131,37 @@ const Abt = () => {
           {/* Description */}
           <div className="prose max-w-none">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">{title}</h2>
-            {description ? documentToReactComponents(description) : null}
+            {description ? documentToReactComponents(description, {
+              renderText: (text) => {
+                return text.split('\n').map((line, i) => (
+                  <span key={i}>
+                    {line}
+                    {i < text.split('\n').length - 1 && <br />}
+                  </span>
+                ));
+              },
+              renderNode: {
+                [BLOCKS.EMBEDDED_ASSET]: (node) => {
+                  const assetId = node.data?.target?.sys?.id;
+                  if (assetId && assetsMap[assetId]) {
+                    const asset = assetsMap[assetId];
+                    const rawUrl = getFirstLocaleString(asset.fields?.file?.url);
+                    const imageUrl = rawUrl ? (rawUrl.startsWith("http") ? rawUrl : `https:${rawUrl}`) : undefined;
+                    
+                    if (imageUrl) {
+                      return (
+                        <img
+                          src={`${imageUrl}?w=800&fit=fill&fm=jpg&q=80`}
+                          alt={getFirstLocaleString(asset.fields?.title) || "Embedded asset"}
+                          className="w-full h-auto rounded-lg shadow-md my-4"
+                        />
+                      );
+                    }
+                  }
+                  return null;
+                },
+              },
+            }) : null}
           </div>
         </div>
       </section>

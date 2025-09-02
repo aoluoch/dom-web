@@ -10,6 +10,7 @@ import type {
 } from "contentful"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import type { Document } from "@contentful/rich-text-types"
+import { BLOCKS } from "@contentful/rich-text-types"
 
 interface BlogSkeleton extends EntrySkeletonType {
   contentTypeId: "blog"
@@ -127,9 +128,38 @@ const BlogDetail = () => {
         <div className="w-full">
           {view.descriptionDoc && (
             <div>
-              <h2 className="text-xl font-semibold text-gray-800 mb-3">Blog Content</h2>
               <div className="prose max-w-none text-gray-700 leading-relaxed">
-                {documentToReactComponents(view.descriptionDoc)}
+                {documentToReactComponents(view.descriptionDoc, {
+                  renderText: (text) => {
+                    return text.split('\n').map((line, i) => (
+                      <span key={i}>
+                        {line}
+                        {i < text.split('\n').length - 1 && <br />}
+                      </span>
+                    ));
+                  },
+                  renderNode: {
+                    [BLOCKS.EMBEDDED_ASSET]: (node) => {
+                      const assetId = node.data?.target?.sys?.id;
+                      if (assetId && assetsMap[assetId]) {
+                        const asset = assetsMap[assetId];
+                        const rawUrl = getFirstLocaleString(asset.fields?.file?.url);
+                        const imageUrl = rawUrl ? (rawUrl.startsWith("http") ? rawUrl : `https:${rawUrl}`) : undefined;
+                        
+                        if (imageUrl) {
+                          return (
+                            <img
+                              src={`${imageUrl}?w=800&fit=fill&fm=jpg&q=80`}
+                              alt={getFirstLocaleString(asset.fields?.title) || "Embedded asset"}
+                              className="w-full h-auto rounded-lg shadow-md my-4"
+                            />
+                          );
+                        }
+                      }
+                      return null;
+                    },
+                  },
+                })}
               </div>
             </div>
           )}
