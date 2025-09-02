@@ -9,6 +9,7 @@ import type {
 } from "contentful"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import type { Document } from "@contentful/rich-text-types"
+import Values from "./Values"
 
 interface AboutSkeleton extends EntrySkeletonType {
   contentTypeId: "about"
@@ -108,29 +109,33 @@ const Abt = () => {
   }
 
   return (
-    <section className="max-w-6xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-        {/* Image */}
-        <div className="w-full">
-          {imageUrl ? (
-            <img
-              src={`${imageUrl}?w=1200&fit=pad&fm=jpg&q=85&bg=rgb:ffffff`}
-              alt={title}
-              className="w-full h-auto rounded-md shadow-md object-contain bg-white"
-              loading="lazy"
-            />
-          ) : (
-            <div className="w-full aspect-[4/3] bg-gray-100 rounded-md" />
-          )}
-        </div>
+    <>
+      <section className="max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+          {/* Image */}
+          <div className="w-full">
+            {imageUrl ? (
+              <img
+                src={`${imageUrl}?w=1200&fit=pad&fm=jpg&q=85&bg=rgb:ffffff`}
+                alt={title}
+                className="w-full h-auto rounded-md shadow-md object-contain bg-white"
+                loading="lazy"
+              />
+            ) : (
+              <div className="w-full aspect-[4/3] bg-gray-100 rounded-md" />
+            )}
+          </div>
 
-        {/* Description */}
-        <div className="prose max-w-none">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">{title}</h2>
-          {description ? documentToReactComponents(description) : null}
+          {/* Description */}
+          <div className="prose max-w-none">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">{title}</h2>
+            {description ? documentToReactComponents(description) : null}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+      
+      <Values />
+    </>
   )
 }
 
