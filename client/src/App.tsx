@@ -2,6 +2,7 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 import Home from './Pages/Home'
 import About from './Pages/About'
 import Blog from './Pages/Blog'
@@ -16,9 +17,9 @@ import Shop from './Pages/Shop'
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 flex flex-col">
         <Navbar />
-        <main>
+        <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/departments" element={<Departments />} />
@@ -33,6 +34,7 @@ function App() {
             <Route path="*" element={<Home />} />
           </Routes>
         </main>
+        <Footer />
       </div>
     </Router>
   )

@@ -1,9 +1,10 @@
 
 import { Facebook, Instagram, Youtube, Phone, MessageCircle, Mail, MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-50 py-12">
+    <footer className="bg-gray-50 py-12 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Logo Section */}
         <div className="mb-12 flex items-center">
@@ -22,34 +23,34 @@ const Footer = () => {
             <h3 className="text-lg font-semibold text-gray-800 mb-6">Departments</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
+                <Link to="/departments/care" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
                   <span className="text-gray-400 mr-2">›</span>
                   DOM Care
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
+                <Link to="/departments/media" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
                   <span className="text-gray-400 mr-2">›</span>
                   DOM Media
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
+                <Link to="/departments/missions" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
                   <span className="text-gray-400 mr-2">›</span>
                   DOM Missions
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
+                <Link to="/departments/publishing" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
                   <span className="text-gray-400 mr-2">›</span>
                   DOM Publishing
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
+                <Link to="/departments/future-generations" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
                   <span className="text-gray-400 mr-2">›</span>
                   DOM Future Generations
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -59,34 +60,34 @@ const Footer = () => {
             <h3 className="text-lg font-semibold text-gray-800 mb-6">Quick Links</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
+                <Link to="/blog" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
                   <span className="text-gray-400 mr-2">›</span>
                   Blog
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
+                <Link to="/events" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
                   <span className="text-gray-400 mr-2">›</span>
                   Events
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
+                <Link to="/shop" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
                   <span className="text-gray-400 mr-2">›</span>
                   DOM Store
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
+                <Link to="/about" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
                   <span className="text-gray-400 mr-2">›</span>
                   About DOM
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
+                <Link to="/contact" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
                   <span className="text-gray-400 mr-2">›</span>
                   Get In Touch
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -130,17 +131,17 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold text-gray-800 mb-6">Connect With Us</h3>
             <div className="space-y-4">
-              <a href="#" className="flex items-center space-x-3 text-gray-600 hover:text-blue-600 transition-colors duration-200 group">
+              <a href="https://facebook.com/davidowusuministries" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-gray-600 hover:text-blue-600 transition-colors duration-200 group">
                 <Facebook className="w-5 h-5 text-blue-600 group-hover:scale-110 transition-transform duration-200" />
                 <span className="text-sm">Facebook</span>
               </a>
               
-              <a href="#" className="flex items-center space-x-3 text-gray-600 hover:text-pink-600 transition-colors duration-200 group">
+              <a href="https://instagram.com/davidowusuministries" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-gray-600 hover:text-pink-600 transition-colors duration-200 group">
                 <Instagram className="w-5 h-5 text-pink-600 group-hover:scale-110 transition-transform duration-200" />
                 <span className="text-sm">Instagram</span>
               </a>
               
-              <a href="#" className="flex items-center space-x-3 text-gray-600 hover:text-red-600 transition-colors duration-200 group">
+              <a href="https://youtube.com/@davidowusuministries" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-gray-600 hover:text-red-600 transition-colors duration-200 group">
                 <Youtube className="w-5 h-5 text-red-600 group-hover:scale-110 transition-transform duration-200" />
                 <span className="text-sm">Youtube</span>
               </a>

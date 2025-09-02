@@ -1,4 +1,3 @@
-import Footer from "../components/Footer"
 import Friendship from "../components/Friendship"
 import Hero from "../components/Hero"
 import JoinLink from "../components/JoinLink"
@@ -18,7 +17,6 @@ const Home = () => {
         <Friendship />
         <Started />
         <TestimonialCarousel />
-        <Footer />
     </>
   )
 }
