@@ -11,6 +11,8 @@ import Contact from './Pages/Contact'
 import Departments from './Pages/Departments'
 import DepartmentDetail from './components/DepartmentDetail'
 import Events from './Pages/Events'
+import EventDetail from './components/EventDetail'
+import BlogDetail from './components/BlogDetail'
 import Institute from './Pages/Institute'
 import Register from './Pages/Register'
 import Shop from './Pages/Shop'
@@ -40,7 +42,9 @@ function App() {
             <Route path="/institute" element={<Institute />} />
             <Route path="/about" element={<About />} />
             <Route path="/events" element={<Events />} />
+            <Route path="/events/:id" element={<EventDetail />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:id" element={<BlogDetail />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/register" element={<Register />} />
