@@ -1,19 +1,21 @@
 import Cover from "../components/Cover"
-import ContactComponent from "../components/ContactComponent"
+import MembershipForm from "../components/MembershipForm"
 
-const Contact = () => {
+
+
+const Membership = () => {
   return (
     <>
     <Cover
-    title="Contact Us"
-    subtitle="Get Connected With DOM."/>
+    title="Membership"
+    subtitle="Join DOM."/>
 
     <div className="container mx-auto px-4 py-8">
-      <ContactComponent />
+      <MembershipForm />
     </div>
     <div className="mt-16 border-t border-gray-300"></div>
     </>
   )
 }
 
-export default Contact
+export default Membership

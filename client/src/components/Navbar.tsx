@@ -48,7 +48,7 @@ const Navbar = () => {
     { name: "About Us", href: "/about" },
     { name: "Events", href: "/events" },
     { name: "Blog", href: "/blog" },
-    { name: "Shop", href: "/shop" },
+    // { name: "Shop",href:"/shop" },
     { name: "Contact Us", href: "/contact" },
   ];
 
@@ -83,7 +83,7 @@ const Navbar = () => {
             ))}
 
             <Link
-              to="/register"
+              to="/membership"
               className="ml-3 xl:ml-4 bg-blue-500 hover:bg-blue-600 focus:bg-blue-600 text-white px-4 xl:px-6 py-2 rounded-md text-sm xl:text-base font-medium transition-all duration-200 shadow-sm hover:shadow whitespace-nowrap focus:outline-none"
             >
               I&apos;m New
@@ -140,7 +140,7 @@ const Navbar = () => {
 
           <div className="pt-4 border-t border-gray-200">
             <Link
-              to="/register"
+              to="/membership"
               onClick={closeMobileMenu}
               className="block w-full bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white px-6 py-3 rounded-lg text-base font-medium transition-all duration-200 shadow-sm hover:shadow focus:outline-none text-center"
             >

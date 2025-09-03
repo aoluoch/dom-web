@@ -14,8 +14,8 @@ import Events from './Pages/Events'
 import EventDetail from './components/EventDetail'
 import BlogDetail from './components/BlogDetail'
 import Institute from './Pages/Institute'
-import Register from './Pages/Register'
-import Shop from './Pages/Shop'
+// import Shop from './Pages/Shop'
+import Membership from './Pages/Membership'
 
 
 function ScrollToTop() {
@@ -45,9 +45,9 @@ function App() {
             <Route path="/events/:id" element={<EventDetail />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:id" element={<BlogDetail />} />
-            <Route path="/shop" element={<Shop />} />
+            {/* <Route path="/shop" element={<Shop />} /> */}
             <Route path="/contact" element={<Contact />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/membership" element={<Membership />} />
             {/* Catch all route - redirect to home */}
             <Route path="*" element={<Home />} />
           </Routes>
