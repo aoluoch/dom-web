@@ -121,7 +121,7 @@ const BlogComponent = () => {
               <img
                 src={`${blog.imageUrl}?w=800&h=600&fit=fill&fm=webp&q=85`}
                 alt={blog.title}
-                className="w-full h-56 object-cover hover:scale-105 transition-transform duration-300"
+                className="w-full h-[100%] object-cover hover:scale-105 transition-transform duration-300"
                 loading="lazy"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
