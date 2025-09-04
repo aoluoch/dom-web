@@ -7,6 +7,7 @@ import {
   SubmitButton,
   countryOptions 
 } from './FormComponents';
+import Cover from '../Cover';
 
 interface FormData {
   title: string;
@@ -107,6 +108,10 @@ const Prophets: React.FC = () => {
   ];
 
   return (
+    <>
+    <Cover
+    title="School Of Prophets"
+    subtitle="Register for our School Of Prophets Programme"/>
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -320,6 +325,7 @@ const Prophets: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -7,6 +7,7 @@ import {
   SubmitButton,
   countryOptions 
 } from './FormComponents';
+import Cover from '../Cover';
 
 interface FormData {
   title: string;
@@ -119,6 +120,10 @@ const Strategic: React.FC = () => {
   ];
 
   return (
+    <>
+    <Cover
+    title="School Of Strategic Planning"
+    subtitle="Register for our School Of Strategic Planning Programme"/>
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -341,6 +346,7 @@ const Strategic: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
