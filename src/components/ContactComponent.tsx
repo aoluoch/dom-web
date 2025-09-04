@@ -48,9 +48,47 @@ const ContactComponent: React.FC = () => {
     }
 
     setIsSubmitting(true);
+
     try {
-      await new Promise((resolve) => setTimeout(resolve, 800));
-      setSubmitted(true);
+      // Create FormData object for Formspree
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('phone', formData.phoneNo);
+      formDataToSend.append('topic', formData.topic);
+      formDataToSend.append('message', formData.message);
+
+      // Send to Formspree
+      const response = await fetch('https://formspree.io/f/xyzdbjll', {
+        method: 'POST',
+        body: formDataToSend,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        // Reset form data
+        setFormData({
+          name: '',
+          phoneNo: '',
+          email: '',
+          topic: '',
+          message: '',
+        });
+        setErrors({});
+        setSubmitAttempted(false);
+      } else {
+        // Handle Formspree errors
+        const errorData = await response.json();
+        console.error('Formspree error:', errorData);
+        throw new Error('Failed to send message. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      // Show user-friendly error message
+      alert('There was an error sending your message. Please try again or contact us directly.');
     } finally {
       setIsSubmitting(false);
     }
