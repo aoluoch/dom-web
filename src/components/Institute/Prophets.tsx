@@ -43,6 +43,8 @@ const Prophets: React.FC = () => {
 
   const [showMinistryAreaOther, setShowMinistryAreaOther] = useState(false);
   const [showMinistryInOther, setShowMinistryInOther] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -60,10 +62,69 @@ const Prophets: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Handle form submission logic here
+    setIsSubmitting(true);
+
+    try {
+      // Create FormData object for Formspree
+      const formDataToSend = new FormData();
+      formDataToSend.append('title', formData.title);
+      formDataToSend.append('firstName', formData.firstName);
+      formDataToSend.append('surname', formData.surname);
+      formDataToSend.append('gender', formData.gender);
+      formDataToSend.append('birthYear', formData.birthYear);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('countryCode', formData.countryCode);
+      formDataToSend.append('phoneNumber', formData.phoneNumber);
+      formDataToSend.append('town', formData.town);
+      formDataToSend.append('level', formData.level);
+      formDataToSend.append('church', formData.church);
+      formDataToSend.append('ministryArea', formData.ministryArea);
+      formDataToSend.append('ministryIn', formData.ministryIn);
+
+      // Send to Formspree
+      const response = await fetch('https://formspree.io/f/xvgbvrlo', {
+        method: 'POST',
+        body: formDataToSend,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        // Reset form data
+        setFormData({
+          title: '',
+          firstName: '',
+          surname: '',
+          gender: '',
+          birthYear: '',
+          email: '',
+          countryCode: '',
+          phoneNumber: '',
+          town: '',
+          level: '',
+          church: '',
+          ministryArea: '',
+          ministryIn: ''
+        });
+        setShowMinistryAreaOther(false);
+        setShowMinistryInOther(false);
+      } else {
+        // Handle Formspree errors
+        const errorData = await response.json();
+        console.error('Formspree error:', errorData);
+        throw new Error('Failed to submit registration. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting prophets form:', error);
+      // Show user-friendly error message
+      alert('There was an error submitting your registration. Please try again or contact us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const titleOptions = [
@@ -153,8 +214,14 @@ const Prophets: React.FC = () => {
           <div className="lg:col-span-2">
             <div className="bg-white rounded-lg shadow-md p-6">
               <h3 className="text-xl font-semibold text-gray-900 mb-6">Your Details</h3>
-              
-              <form onSubmit={handleSubmit} className="space-y-6">
+
+              {submitted ? (
+                <div className="rounded-md bg-green-50 p-4 text-green-700 text-center">
+                  <h4 className="text-lg font-semibold mb-2">Registration Successful!</h4>
+                  <p>Thank you for registering for the School of Prophets. We will contact you soon with further details.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Personal Information */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   <SelectField
@@ -316,9 +383,10 @@ const Prophets: React.FC = () => {
 
                 {/* Submit Button */}
                 <div className="flex justify-center pt-6">
-                  <SubmitButton />
+                  <SubmitButton disabled={isSubmitting} />
                 </div>
               </form>
+              )}
             </div>
           </div>
         </div>
