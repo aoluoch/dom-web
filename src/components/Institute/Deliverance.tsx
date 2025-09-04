@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { 
-  FormField, 
-  SelectField, 
-  TextAreaField, 
-  ContactInfo, 
-  SubmitButton,
-  countryOptions 
+import {
+  FormField,
+  SelectField,
+  TextAreaField,
+  ContactInfo,
+  SubmitButton
 } from './FormComponents';
+import { countryOptions } from './countryOptions';
 import Cover from '../Cover';
 
 interface FormData {

@@ -1,13 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { client } from "../lib/contentfulClient";
 import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
+import type { Document } from "@contentful/rich-text-types";
 
 interface Testimonial {
   id: string;
   name: string;
   text: string;
   image: string;
+}
+
+interface TestimonialFields {
+  name: string;
+  description: Document;
+  image: {
+    fields: {
+      file: { url: string };
+    };
+  };
 }
 
 export default function TestimonialCarousel() {
@@ -20,15 +31,18 @@ export default function TestimonialCarousel() {
       try {
         const res = await client.getEntries({
           content_type: "testimonals", // matches your JSON id
-          order: "-sys.createdAt", // latest first
+          order: ["-sys.createdAt"], // latest first
         });
 
-        const mapped: Testimonial[] = res.items.map((item: any) => ({
-          id: item.sys.id,
-          name: item.fields.name,
-          text: documentToPlainTextString(item.fields.description),
-          image: `https:${item.fields.image.fields.file.url}?w=400&h=400&fit=thumb`,
-        }));
+        const mapped: Testimonial[] = res.items.map((item) => {
+          const fields = item.fields as unknown as TestimonialFields;
+          return {
+            id: item.sys.id,
+            name: fields.name,
+            text: documentToPlainTextString(fields.description),
+            image: `https:${fields.image.fields.file.url}?w=400&h=400&fit=thumb`,
+          };
+        });
 
         setTestimonials(mapped);
       } catch (err) {
@@ -39,11 +53,11 @@ export default function TestimonialCarousel() {
     fetchTestimonials();
   }, []);
 
-  const nextTestimonial = () => {
+  const nextTestimonial = useCallback(() => {
     setCurrentIndex((prev) =>
       testimonials.length > 0 ? (prev === testimonials.length - 1 ? 0 : prev + 1) : 0
     );
-  };
+  }, [testimonials.length]);
 
   const prevTestimonial = () => {
     setCurrentIndex((prev) =>
@@ -60,7 +74,7 @@ export default function TestimonialCarousel() {
     if (testimonials.length === 0) return;
     const interval = setInterval(nextTestimonial, 8000);
     return () => clearInterval(interval);
-  }, [testimonials]);
+  }, [testimonials, nextTestimonial]);
 
   if (testimonials.length === 0) {
     return (

@@ -8,31 +8,48 @@ const client = createClient({
   accessToken: import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN as string,
 });
 
-// Define type for Contentful fields
-interface JoinLinkFields {
-  title: string;
-  description: any; // RichText JSON
-  image: {
-    fields: {
-      file: { url: string };
-      title: string;
+// Define types for Contentful rich text
+interface RichTextContent {
+  nodeType: string;
+  content?: Array<{
+    nodeType: string;
+    value?: string;
+    content?: RichTextContent[];
+  }>;
+}
+
+interface RichTextDocument {
+  nodeType: string;
+  content: RichTextContent[];
+}
+
+// Define type for Contentful data
+interface JoinLinkData {
+  fields: {
+    title: string;
+    description: RichTextDocument;
+    image: {
+      fields: {
+        file: { url: string };
+        title: string;
+      };
     };
+    link: string;
   };
-  link: string;
 }
 
 function JoinLink() {
-  const [data, setData] = useState<Entry<JoinLinkFields> | null>(null);
+  const [data, setData] = useState<JoinLinkData | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await client.getEntries<JoinLinkFields>({
+        const res = await client.getEntries({
           content_type: "joiningLinkHome",
           limit: 1,
         });
         if (res.items.length > 0) {
-          setData(res.items[0]);
+          setData(res.items[0] as unknown as JoinLinkData);
         }
       } catch (error) {
         console.error("Error fetching data from Contentful:", error);
@@ -70,12 +87,12 @@ function JoinLink() {
             <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
               {/* Since description is RichText JSON, we should render it properly */}
               {data.fields.description?.content?.map(
-                (block: any, index: number) => {
+                (block: RichTextContent, index: number) => {
                   if (block.nodeType === "paragraph") {
                     return (
                       <p key={index}>
                         {block.content
-                          .map((c: any) => c.value)
+                          ?.map((c) => c.value)
                           .join(" ")}
                       </p>
                     );
