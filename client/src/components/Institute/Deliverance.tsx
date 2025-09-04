@@ -126,7 +126,7 @@ const Deliverance: React.FC = () => {
               <div className="mb-6">
                 <img
                   className="w-full h-48 object-cover rounded-lg mb-4"
-                  src="../img/school-of-deliverance.jpeg"
+                  src="https://live.staticflickr.com/65535/54764722068_bc25805981_w.jpg"
                   alt="School of Deliverance"
                 />
               </div>

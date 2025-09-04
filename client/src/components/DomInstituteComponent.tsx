@@ -52,8 +52,38 @@ const DomInstituteComponent = () => {
     };
   }, []);
 
-  // Convert title -> slug (School Purpose -> school-purpose)
+  // Map Contentful titles to local Institute component routes
+  // This ensures that titles from Contentful CMS route to the correct local components
   const getInstituteSlug = (title: string) => {
+    const titleMappings: Record<string, string> = {
+      // Main Institute Programs
+      "School of Strategic Planning": "school-of-strategic-planning",
+      "School of Purpose": "school-of-purpose",
+      "School of Purpose.": "school-of-purpose", // Handle period at end
+      "School of Deliverance": "school-of-deliverance",
+      "School of Prophets": "school-of-prophets",
+      "Prophetic School": "prophetic-school",
+
+      // Alternative variations that might come from Contentful
+      "Strategic Planning": "school-of-strategic-planning",
+      "Purpose": "school-of-purpose",
+      "Purpose.": "school-of-purpose", // Handle period at end
+      "Deliverance": "school-of-deliverance",
+      "Prophets": "school-of-prophets",
+      "Prophetic": "prophetic-school",
+      "School of Strategic": "school-of-strategic-planning",
+      "Strategic School": "school-of-strategic-planning",
+      "Purpose School": "school-of-purpose",
+      "Deliverance School": "school-of-deliverance",
+      "Prophets School": "school-of-prophets",
+    };
+
+    // Check if we have a direct mapping
+    if (titleMappings[title]) {
+      return titleMappings[title];
+    }
+
+    // Fallback to slug conversion for unmapped titles
     return title.toLowerCase().replace(/\s+/g, "-");
   };
 
@@ -84,7 +114,9 @@ const DomInstituteComponent = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {institutes.map((institute) => {
-        const title = institute.fields.title;
+        const title = typeof institute.fields.title === 'string'
+          ? institute.fields.title
+          : String(institute.fields.title || '');
         const description = institute.fields.description as Document;
 
         return (
