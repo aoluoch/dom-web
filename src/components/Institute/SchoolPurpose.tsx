@@ -50,6 +50,8 @@ const SchoolPurpose: React.FC = () => {
 
   const [showPlanDiv, setShowPlanDiv] = useState(false);
   const [showStrategicDiv, setShowStrategicDiv] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -59,7 +61,7 @@ const SchoolPurpose: React.FC = () => {
     }));
 
     // Handle conditional field visibility
-    if (name === 'financialPan') {
+    if (name === 'financialPlan') {
       setShowPlanDiv(value === 'Yes');
     }
     if (name === 'documentedStrategicPlan') {
@@ -67,10 +69,75 @@ const SchoolPurpose: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Handle form submission logic here
+    setIsSubmitting(true);
+
+    try {
+      // Create FormData object for Formspree
+      const formDataToSend = new FormData();
+      formDataToSend.append('title', formData.title);
+      formDataToSend.append('firstName', formData.firstName);
+      formDataToSend.append('surname', formData.surname);
+      formDataToSend.append('gender', formData.gender);
+      formDataToSend.append('birthYear', formData.birthYear);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('countryCode', formData.countryCode);
+      formDataToSend.append('phoneNumber', formData.phoneNumber);
+      formDataToSend.append('town', formData.town);
+      formDataToSend.append('financialPlan', formData.financialPlan);
+      formDataToSend.append('planPeriod', formData.planPeriod);
+      formDataToSend.append('documentedStrategicPlan', formData.documentedStrategicPlan);
+      formDataToSend.append('strategicPlanPeriod', formData.strategicPlanPeriod);
+      formDataToSend.append('strategicPlanReview', formData.strategicPlanReview);
+      formDataToSend.append('occupation', formData.occupation);
+      formDataToSend.append('achievements', formData.achievements);
+
+      // Send to Formspree
+      const response = await fetch('https://formspree.io/f/xnnbovwd', {
+        method: 'POST',
+        body: formDataToSend,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        // Reset form data
+        setFormData({
+          title: '',
+          firstName: '',
+          surname: '',
+          gender: '',
+          birthYear: '',
+          email: '',
+          countryCode: '',
+          phoneNumber: '',
+          town: '',
+          financialPlan: '',
+          planPeriod: '',
+          documentedStrategicPlan: '',
+          strategicPlanPeriod: '',
+          strategicPlanReview: '',
+          occupation: '',
+          achievements: ''
+        });
+        setShowPlanDiv(false);
+        setShowStrategicDiv(false);
+      } else {
+        // Handle Formspree errors
+        const errorData = await response.json();
+        console.error('Formspree error:', errorData);
+        throw new Error('Failed to submit registration. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting school purpose form:', error);
+      // Show user-friendly error message
+      alert('There was an error submitting your registration. Please try again or contact us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const titleOptions = [
@@ -170,8 +237,14 @@ const SchoolPurpose: React.FC = () => {
           <div className="lg:col-span-2">
             <div className="bg-white rounded-lg shadow-md p-6">
               <h3 className="text-xl font-semibold text-gray-900 mb-6">Your Details</h3>
-              
-              <form onSubmit={handleSubmit} className="space-y-6">
+
+              {submitted ? (
+                <div className="rounded-md bg-green-50 p-4 text-green-700 text-center">
+                  <h4 className="text-lg font-semibold mb-2">Registration Successful!</h4>
+                  <p>Thank you for registering for the School of Purpose. We will contact you soon with further details.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Personal Information */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   <SelectField
@@ -270,7 +343,7 @@ const SchoolPurpose: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <SelectField
                     label="Do you work with a financial plan or a budget?"
-                    name="financialPan"
+                    name="financialPlan"
                     options={yesNoOptions}
                     placeholder="Please select one:"
                     value={formData.financialPlan}
@@ -342,9 +415,10 @@ const SchoolPurpose: React.FC = () => {
 
                 {/* Submit Button */}
                 <div className="flex justify-center pt-6">
-                  <SubmitButton />
+                  <SubmitButton disabled={isSubmitting} />
                 </div>
               </form>
+              )}
             </div>
           </div>
         </div>
