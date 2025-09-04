@@ -57,8 +57,8 @@ DOM/
 ## Getting Started
 
 ### Prerequisites
-- Node.js 18+
-- npm or yarn
+- Node.js 18+ or 20.x
+- npm 9.x or higher
 - Contentful account with API keys
 
 ### Installation
@@ -152,6 +152,65 @@ DOM International operates in:
 - 🇺🇸 United States
 - 🇿🇲 Zambia
 - 🇿🇼 Zimbabwe
+
+## 🚀 Production Deployment
+
+### Available Scripts for Production
+
+- `npm run test:ci` - Full CI test suite (type check, lint, build)
+- `npm run build` - Build optimized production bundle
+- `npm run preview` - Preview production build locally
+
+### Deployment Options
+
+#### 1. Netlify (Recommended)
+```bash
+# Connect your GitHub repository to Netlify
+# Netlify will automatically build and deploy
+# Configuration: netlify.toml
+```
+
+#### 2. Vercel
+```bash
+# Connect your GitHub repository to Vercel
+# Vercel will automatically build and deploy
+# Configuration: vercel.json
+```
+
+#### 3. Docker
+```bash
+# Build and run with Docker
+docker build -t dom-web .
+docker run -p 80:80 dom-web
+
+# Or use docker-compose
+docker-compose up -d
+```
+
+### Environment Variables for Production
+
+Set these in your deployment platform:
+```env
+VITE_CONTENTFUL_SPACE_ID=your_space_id
+VITE_CONTENTFUL_ACCESS_TOKEN=your_access_token
+```
+
+### CI/CD Pipeline
+
+The project includes a comprehensive GitHub Actions workflow:
+
+- **Automated Testing**: Type checking, linting, building
+- **Multi-Node Testing**: Tests on Node.js 18.x and 20.x
+- **Security Scanning**: npm audit and Snyk vulnerability checks
+- **Performance Monitoring**: Lighthouse CI integration
+- **Automated Deployment**: Staging and production deployments
+
+### Performance & Security
+
+- **Security Headers**: CSP, HSTS, X-Frame-Options
+- **Asset Optimization**: Gzip compression, cache headers
+- **Performance Monitoring**: Lighthouse CI with performance budgets
+- **Health Checks**: Docker health checks and monitoring endpoints
 
 ## Contributing
 

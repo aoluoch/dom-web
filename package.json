@@ -13,7 +13,10 @@
     "test": "npm run type-check && npm run lint",
     "test:ci": "npm run type-check && npm run lint && npm run build",
     "clean": "rm -rf dist node_modules/.vite",
-    "start": "npm run preview"
+    "start": "npm run preview",
+    "deploy": "./scripts/deploy.sh",
+    "deploy:netlify": "./scripts/deploy.sh netlify",
+    "deploy:vercel": "./scripts/deploy.sh vercel"
   },
   "dependencies": {
     "@contentful/rich-text-plain-text-renderer": "^17.1.0",
