@@ -114,9 +114,44 @@ const MembershipForm: React.FC = () => {
     if (Object.keys(validationErrors).length > 0) return;
 
     setIsSubmitting(true);
+
     try {
-      await new Promise((resolve) => setTimeout(resolve, 800));
-      setSubmitted(true);
+      // Create FormData object for Formspree
+      const formDataToSend = new FormData();
+      formDataToSend.append('fullName', formData.fullName);
+      formDataToSend.append('gender', formData.gender);
+      formDataToSend.append('dateOfBirth', formData.dateOfBirth);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('phoneNo', formData.phoneNo);
+      formDataToSend.append('country', formData.country);
+      formDataToSend.append('city', formData.city);
+      formDataToSend.append('prayerRequest', formData.prayerRequest);
+
+      // Send to Formspree
+      const response = await fetch('https://formspree.io/f/movnpwyz', {
+        method: 'POST',
+        body: formDataToSend,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        // Reset form data
+        setFormData(initialFormData);
+        setErrors({});
+        setSubmitAttempted(false);
+      } else {
+        // Handle Formspree errors
+        const errorData = await response.json();
+        console.error('Formspree error:', errorData);
+        throw new Error('Failed to submit membership registration. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting membership form:', error);
+      // Show user-friendly error message
+      alert('There was an error submitting your membership registration. Please try again or contact us directly.');
     } finally {
       setIsSubmitting(false);
     }
