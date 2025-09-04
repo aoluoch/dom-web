@@ -16,7 +16,7 @@ import BlogDetail from './components/BlogDetail'
 import Institute from './Pages/Institute'
 // import Shop from './Pages/Shop'
 import Membership from './Pages/Membership'
-
+import DomInstituteDetail from './components/DomInstituteDetail'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -40,6 +40,7 @@ function App() {
             <Route path="/departments" element={<Departments />} />
             <Route path="/departments/:id" element={<DepartmentDetail />} />
             <Route path="/institute" element={<Institute />} />
+            <Route path="/institute/:slug" element={<DomInstituteDetail />} />
             <Route path="/about" element={<About />} />
             <Route path="/events" element={<Events />} />
             <Route path="/events/:id" element={<EventDetail />} />
