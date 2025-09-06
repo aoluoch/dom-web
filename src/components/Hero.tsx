@@ -107,20 +107,21 @@ const Hero = () => {
   }, []);
 
   return (
-    <section 
-      className="relative w-full overflow-hidden min-h-screen"
+    <section
+      className="relative w-full overflow-hidden min-h-screen max-w-full"
       style={{
         backgroundImage: `url(https://live.staticflickr.com/65535/54759275817_f60450ea78_z.jpg)`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'scroll'
       }}
     >
       {/* Dark overlay for better text readability */}
       <div className="absolute inset-0 bg-black/50 z-10"></div>
-      
+
       {/* Slides Container */}
-      <div className="relative h-full min-h-screen">
+      <div className="relative h-full min-h-screen w-full pt-14 sm:pt-16 lg:pt-18">
         {slides.map((slide, index) => (
           <div
             key={slide.id}
@@ -129,22 +130,22 @@ const Hero = () => {
             }`}
           >
             {/* Content Container */}
-            <div className="h-full min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+            <div className="h-full min-h-[calc(100vh-3.5rem)] sm:min-h-[calc(100vh-4rem)] lg:min-h-[calc(100vh-4.5rem)] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 relative z-20">
               
               {/* Global Presence Slide */}
               {slide.countries ? (
-                <div className="text-center w-full max-w-7xl mx-auto">
-                  <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-3 sm:mb-5 lg:mb-6 drop-shadow-2xl">
+                <div className="text-center w-full max-w-7xl mx-auto px-4">
+                  <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight mb-3 sm:mb-4 lg:mb-6 drop-shadow-2xl">
                     {slide.title}
                   </h1>
                   {slide.subtitle && (
-                    <p className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-white uppercase tracking-wide mb-6 sm:mb-8 lg:mb-10 drop-shadow-lg">
+                    <p className="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-white uppercase tracking-wide mb-6 sm:mb-8 lg:mb-10 drop-shadow-lg">
                       {slide.subtitle}
                     </p>
                   )}
                   
                   {/* Countries Grid - Fully Responsive */}
-                  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-3 sm:gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto">
+                  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-2 sm:gap-3 md:gap-4 lg:gap-6 max-w-6xl mx-auto">
                     {slide.countries.map((country, i) => (
                       <div
                         key={i}
@@ -154,11 +155,11 @@ const Hero = () => {
                           <img
                             src={country.flag}
                             alt={country.name}
-                            className="w-12 h-8 sm:w-16 sm:h-10 md:w-20 md:h-12 lg:w-24 lg:h-16 xl:w-28 xl:h-18 object-cover rounded"
+                            className="w-10 h-7 sm:w-14 sm:h-9 md:w-18 md:h-12 lg:w-22 lg:h-15 xl:w-26 xl:h-17 object-cover rounded"
                             loading="lazy"
                           />
                         </div>
-                        <p className="mt-2 sm:mt-3 text-xs sm:text-sm md:text-base font-bold uppercase text-white leading-tight drop-shadow-md text-center">
+                        <p className="mt-1 sm:mt-2 text-[10px] sm:text-xs md:text-sm font-bold uppercase text-white leading-tight drop-shadow-md text-center">
                           {country.name}
                         </p>
                       </div>
@@ -169,28 +170,28 @@ const Hero = () => {
               
               /* Grace Hour Slide - Enhanced Responsive Layout */
               : slide.id === 1 ? (
-                <div className="w-full max-w-7xl mx-auto">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
+                <div className="w-full max-w-7xl mx-auto px-2 sm:px-0">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16 items-center min-h-[calc(80vh-3.5rem)] lg:min-h-0">
                     {/* Left Side - Text Content */}
-                    <div className="text-center lg:text-left space-y-4 sm:space-y-6 order-2 lg:order-1">
-                      <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight drop-shadow-2xl">
+                    <div className="text-center lg:text-left space-y-3 sm:space-y-4 lg:space-y-6 order-2 lg:order-1 px-2 sm:px-0 pb-6 lg:pb-0">
+                      <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight drop-shadow-2xl">
                         {slide.title}
                       </h1>
 
                       {slide.subtitle && (
-                        <p className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-white uppercase tracking-wide drop-shadow-lg">
+                        <p className="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-white uppercase tracking-wide drop-shadow-lg">
                           {slide.subtitle}
                         </p>
                       )}
 
                       {slide.schedule && (
-                        <p className="text-base sm:text-lg md:text-xl font-bold uppercase text-yellow-300 tracking-wide drop-shadow-lg">
+                        <p className="text-sm sm:text-base md:text-lg lg:text-xl font-bold uppercase text-yellow-300 tracking-wide drop-shadow-lg">
                           {slide.schedule}
                         </p>
                       )}
 
                       {slide.times && (
-                        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6">
+                        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 sm:p-4 lg:p-6 mx-2 sm:mx-0">
                           <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white leading-relaxed drop-shadow-lg">
                             {slide.times}
                           </p>
@@ -198,13 +199,13 @@ const Hero = () => {
                       )}
 
                       {slide.buttons && (
-                        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start pt-2 sm:pt-4">
+                        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:gap-6 justify-center lg:justify-start pt-2 sm:pt-4 px-2 sm:px-0">
                           {slide.buttons.map((btn, i) => (
                             btn.href && btn.href.startsWith('/') ? (
                               <Link
                                 key={i}
                                 to={btn.href}
-                                className={`px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-base sm:text-lg font-bold shadow-xl transition-all duration-300 transform hover:scale-105 ${btn.style}`}
+                                className={`px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 rounded-xl text-sm sm:text-base lg:text-lg font-bold shadow-xl transition-all duration-300 transform hover:scale-105 text-center ${btn.style}`}
                               >
                                 {btn.label}
                               </Link>
@@ -212,7 +213,7 @@ const Hero = () => {
                               <a
                                 key={i}
                                 href={btn.href}
-                                className={`px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-base sm:text-lg font-bold shadow-xl transition-all duration-300 transform hover:scale-105 ${btn.style}`}
+                                className={`px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 rounded-xl text-sm sm:text-base lg:text-lg font-bold shadow-xl transition-all duration-300 transform hover:scale-105 text-center ${btn.style}`}
                                 target={btn.href?.startsWith('http') ? '_blank' : undefined}
                                 rel={btn.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
                               >
@@ -226,15 +227,17 @@ const Hero = () => {
 
                     {/* Right Side - Grace Hour Image */}
                     {slide.img && (
-                      <div className="flex justify-center items-center order-1 lg:order-2">
-                        <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
-                          <div className="absolute rounded-2xl"></div>
-                          <img
-                            src={slide.img}
-                            alt={slide.title}
-                            className="relative rounded-2xl shadow-2xl w-full h-auto object-cover max-h-[300px] sm:max-h-[400px] md:max-h-[500px] lg:max-h-[600px]"
-                            loading="lazy"
-                          />
+                      <div className="flex justify-center items-center order-1 lg:order-2 mb-4 lg:mb-0">
+                        <div className="relative w-full max-w-[280px] sm:max-w-[320px] md:max-w-[380px] lg:max-w-[420px] xl:max-w-[480px]">
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl z-10"></div>
+                          <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-2 border border-white/20 shadow-2xl">
+                            <img
+                              src={slide.img}
+                              alt={slide.title}
+                              className="w-full h-auto object-contain rounded-xl aspect-[4/3] bg-white/5"
+                              loading="lazy"
+                            />
+                          </div>
                         </div>
                       </div>
                     )}
@@ -244,24 +247,24 @@ const Hero = () => {
               
               /* Sunday Service Slide - Enhanced Layout */
               : (
-                <div className="w-full max-w-7xl mx-auto">
-                  <div className="text-center space-y-6 sm:space-y-8 lg:space-y-10">
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight drop-shadow-2xl">
+                <div className="w-full max-w-7xl mx-auto px-2 sm:px-0">
+                  <div className="text-center space-y-4 sm:space-y-6 lg:space-y-8">
+                    <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight drop-shadow-2xl px-2">
                       {slide.title}
                     </h1>
-                    
+
                     {slide.subtitle && (
-                      <p className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-white uppercase tracking-wide drop-shadow-lg">
+                      <p className="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-white uppercase tracking-wide drop-shadow-lg px-2">
                         {slide.subtitle}
                       </p>
                     )}
 
                     {/* Meeting Details */}
                     {slide.details && (
-                      <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center items-center">
+                      <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center items-center px-4">
                         {slide.details.map((detail, i) => (
-                          <div key={i} className="bg-white/90 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-lg shadow-lg">
-                            <span className="text-sm sm:text-base md:text-lg font-bold text-gray-800">
+                          <div key={i} className="bg-white/95 backdrop-blur-sm px-3 sm:px-4 py-2 sm:py-3 rounded-lg shadow-lg w-full sm:w-auto max-w-xs">
+                            <span className="text-xs sm:text-sm md:text-base font-bold text-gray-800 block text-center">
                               {detail.label}: <span className="text-blue-600">{detail.value}</span>
                             </span>
                           </div>
@@ -271,13 +274,13 @@ const Hero = () => {
 
                     {/* Service Times */}
                     {slide.services && (
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto px-4">
                         {slide.services.map((service, i) => (
-                          <div key={i} className="bg-white/95 backdrop-blur-sm p-6 sm:p-8 rounded-xl shadow-xl border border-white/20">
-                            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-3 sm:mb-4">
+                          <div key={i} className="bg-white/95 backdrop-blur-sm p-4 sm:p-6 rounded-xl shadow-xl border border-white/20">
+                            <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-800 mb-2 sm:mb-3">
                               {service.title}
                             </h3>
-                            <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed">
+                            <p className="text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed">
                               {service.time}
                             </p>
                           </div>
@@ -287,13 +290,13 @@ const Hero = () => {
 
                     {/* Action Buttons */}
                     {slide.buttons && (
-                      <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center pt-4 sm:pt-6">
+                      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center pt-4 sm:pt-6 px-4 pb-6 sm:pb-0">
                         {slide.buttons.map((btn, i) => (
                           btn.href && btn.href.startsWith('/') ? (
                             <Link
                               key={i}
                               to={btn.href}
-                              className={`px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-base sm:text-lg font-bold shadow-xl transition-all duration-300 transform hover:scale-105 min-w-[140px] sm:min-w-[160px] ${btn.style}`}
+                              className={`px-4 sm:px-6 py-3 sm:py-4 rounded-xl text-sm sm:text-base font-bold shadow-xl transition-all duration-300 transform hover:scale-105 min-w-[120px] sm:min-w-[140px] text-center ${btn.style}`}
                             >
                               {btn.label}
                             </Link>
@@ -301,7 +304,7 @@ const Hero = () => {
                             <a
                               key={i}
                               href={btn.href}
-                              className={`px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-base sm:text-lg font-bold shadow-xl transition-all duration-300 transform hover:scale-105 min-w-[140px] sm:min-w-[160px] ${btn.style}`}
+                              className={`px-4 sm:px-6 py-3 sm:py-4 rounded-xl text-sm sm:text-base font-bold shadow-xl transition-all duration-300 transform hover:scale-105 min-w-[120px] sm:min-w-[140px] text-center ${btn.style}`}
                               target={btn.href?.startsWith('http') ? '_blank' : undefined}
                               rel={btn.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
                             >
@@ -320,13 +323,13 @@ const Hero = () => {
       </div>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-3 sm:bottom-5 lg:bottom-6 left-1/2 transform -translate-x-1/2 z-30">
-        <div className="flex space-x-1.5 sm:space-x-2">
+      <div className="absolute bottom-2 sm:bottom-4 lg:bottom-6 left-1/2 transform -translate-x-1/2 z-30">
+        <div className="flex space-x-2 sm:space-x-3 bg-black/40 backdrop-blur-sm rounded-full px-3 py-2 shadow-lg">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrent(index)}
-              className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
+              className={`w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full transition-all duration-300 ${
                 index === current
                   ? "bg-white shadow-lg scale-110"
                   : "bg-white/50 hover:bg-white/75"
@@ -337,24 +340,24 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Navigation Arrows for larger screens */}
+      {/* Navigation Arrows - Hidden on mobile to avoid interference with touch gestures */}
       <div className="hidden md:block">
         <button
           onClick={() => setCurrent((prev) => (prev - 1 + slides.length) % slides.length)}
-          className="absolute left-3 lg:left-6 top-1/2 transform -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-1.5 lg:p-2 rounded-full transition-all duration-300"
+          className="absolute left-3 lg:left-6 top-1/2 transform -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-2 lg:p-3 rounded-full transition-all duration-300 shadow-lg"
           aria-label="Previous slide"
         >
-          <svg className="w-4 h-4 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-        
+
         <button
           onClick={() => setCurrent((prev) => (prev + 1) % slides.length)}
-          className="absolute right-3 lg:right-6 top-1/2 transform -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-1.5 lg:p-2 rounded-full transition-all duration-300"
+          className="absolute right-3 lg:right-6 top-1/2 transform -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-2 lg:p-3 rounded-full transition-all duration-300 shadow-lg"
           aria-label="Next slide"
         >
-          <svg className="w-4 h-4 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
