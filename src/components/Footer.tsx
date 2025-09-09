@@ -72,11 +72,17 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/shop" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
-                  <span className="text-gray-400 mr-2">›</span>
-                  DOM Store
-                </Link>
+                <a 
+                    href="https://grace-arena.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center"
+                >
+                    <span className="text-gray-400 mr-2">›</span>
+                    Book an Appointment
+                </a>
               </li>
+
               <li>
                 <Link to="/about" className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center">
                   <span className="text-gray-400 mr-2">›</span>

@@ -344,20 +344,20 @@ const Hero = () => {
       <div className="hidden md:block">
         <button
           onClick={() => setCurrent((prev) => (prev - 1 + slides.length) % slides.length)}
-          className="absolute left-3 lg:left-6 top-1/2 transform -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-2 lg:p-3 rounded-full transition-all duration-300 shadow-lg"
+          className="absolute left-3 lg:left-6 top-1/2 transform -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-2 lg:p-1 rounded-full transition-all duration-300 shadow-lg"
           aria-label="Previous slide"
         >
-          <svg className="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-2 h-2 lg:w-3 lg:h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
 
         <button
           onClick={() => setCurrent((prev) => (prev + 1) % slides.length)}
-          className="absolute right-3 lg:right-6 top-1/2 transform -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-2 lg:p-3 rounded-full transition-all duration-300 shadow-lg"
+          className="absolute right-3 lg:right-6 top-1/2 transform -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-2 lg:p-1 rounded-full transition-all duration-300 shadow-lg"
           aria-label="Next slide"
         >
-          <svg className="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-2 h-2 lg:w-3 lg:h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
