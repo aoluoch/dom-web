@@ -160,7 +160,7 @@ const Footer = () => {
       <div className="mt-12 bg-blue-500 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center text-white text-sm">
-            Copyrights © 2025 All Rights Reserved by David Owusu Ministries.
+            Copyright © {new Date().getFullYear()} All Rights Reserved by David Owusu Ministries.
           </p>
         </div>
       </div>
