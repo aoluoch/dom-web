@@ -137,17 +137,17 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold text-gray-800 mb-6">Connect With Us</h3>
             <div className="space-y-4">
-              <a href="https://facebook.com/davidowusuministries" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-gray-600 hover:text-blue-600 transition-colors duration-200 group">
+              <a href="https://www.facebook.com/prophetdavidowusu" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-gray-600 hover:text-blue-600 transition-colors duration-200 group">
                 <Facebook className="w-5 h-5 text-blue-600 group-hover:scale-110 transition-transform duration-200" />
                 <span className="text-sm">Facebook</span>
               </a>
               
-              <a href="https://instagram.com/davidowusuministries" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-gray-600 hover:text-pink-600 transition-colors duration-200 group">
+              <a href="https://www.instagram.com/prophdavidowusu/" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-gray-600 hover:text-pink-600 transition-colors duration-200 group">
                 <Instagram className="w-5 h-5 text-pink-600 group-hover:scale-110 transition-transform duration-200" />
                 <span className="text-sm">Instagram</span>
               </a>
               
-              <a href="https://youtube.com/@davidowusuministries" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-gray-600 hover:text-red-600 transition-colors duration-200 group">
+              <a href="https://www.youtube.com/@prophetdavidowusu4328" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-gray-600 hover:text-red-600 transition-colors duration-200 group">
                 <Youtube className="w-5 h-5 text-red-600 group-hover:scale-110 transition-transform duration-200" />
                 <span className="text-sm">Youtube</span>
               </a>
