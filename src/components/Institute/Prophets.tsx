@@ -21,7 +21,9 @@ interface FormData {
   level: string;
   church: string;
   ministryArea: string;
+  ministryAreaOther: string;
   ministryIn: string;
+  ministryInOther: string;
 }
 
 const Prophets: React.FC = () => {
@@ -38,7 +40,9 @@ const Prophets: React.FC = () => {
     level: '',
     church: '',
     ministryArea: '',
-    ministryIn: ''
+    ministryAreaOther: '',
+    ministryIn: '',
+    ministryInOther: ''
   });
 
   const [showMinistryAreaOther, setShowMinistryAreaOther] = useState(false);
@@ -81,7 +85,9 @@ const Prophets: React.FC = () => {
       formDataToSend.append('level', formData.level);
       formDataToSend.append('church', formData.church);
       formDataToSend.append('ministryArea', formData.ministryArea);
+      formDataToSend.append('ministryAreaOther', formData.ministryAreaOther);
       formDataToSend.append('ministryIn', formData.ministryIn);
+      formDataToSend.append('ministryInOther', formData.ministryInOther);
 
       // Send to Formspree
       const response = await fetch('https://formspree.io/f/xvgbvrlo', {
@@ -108,7 +114,9 @@ const Prophets: React.FC = () => {
           level: '',
           church: '',
           ministryArea: '',
-          ministryIn: ''
+          ministryAreaOther: '',
+          ministryIn: '',
+          ministryInOther: ''
         });
         setShowMinistryAreaOther(false);
         setShowMinistryInOther(false);
@@ -146,14 +154,14 @@ const Prophets: React.FC = () => {
   ];
 
   const ministryAreaOptions = [
-    { value: 'Administration', label: 'Administration' },
-    { value: 'Children', label: 'Children' },
-    { value: 'Intercessory', label: 'Intercessory' },
+    { value: 'Administration Team', label: 'Administration Team' },
+    { value: 'Praise & Worship Team', label: 'Praise & Worship Team' },
+    { value: 'Counselling Team', label: 'Counselling Team' },
     { value: 'Men\'s', label: 'Men\'s' },
     { value: 'Women\'s', label: 'Women\'s' },
     { value: 'Protocol', label: 'Protocol' },
     { value: 'Ushering', label: 'Ushering' },
-    { value: 'Worship', label: 'Worship' },
+    { value: 'Technical, Information Technology & Media Team', label: 'Technical, Information Technology & Media Team' },
     { value: 'Youth', label: 'Youth' },
     { value: 'other', label: 'Other' }
   ];
@@ -355,7 +363,8 @@ const Prophets: React.FC = () => {
                       name="ministryAreaOther"
                       type="text"
                       placeholder="Enter ministry area here"
-                      value=""
+                      required
+                      value={formData.ministryAreaOther}
                       onChange={handleInputChange}
                     />
                   )}
@@ -375,7 +384,8 @@ const Prophets: React.FC = () => {
                       name="ministryInOther"
                       type="text"
                       placeholder="Enter ministry here"
-                      value=""
+                      required
+                      value={formData.ministryInOther}
                       onChange={handleInputChange}
                     />
                   )}
