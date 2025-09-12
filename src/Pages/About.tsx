@@ -7,7 +7,7 @@ const About = () => {
   return (
     <>
     <Cover 
-    title="About DOM"
+    title="ABOUT DOM"
     subtitle="DOM International is an Interdenominational organization."/>
 
     <div className="container mx-auto px-4 py-8">

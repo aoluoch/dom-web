@@ -5,7 +5,7 @@ const Departments = () => {
   return (
     <>
     <Cover 
-    title="Departments" 
+    title="DEPARTMENTS" 
     subtitle="Learn more about DOM Departments" />
 
     <div className="container mx-auto px-4 py-8">

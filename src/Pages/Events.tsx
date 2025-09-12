@@ -6,7 +6,7 @@ const Events = () => {
   return (
     <>
     <Cover
-    title="Events"
+    title="EVENTS"
     subtitle="Join us at any of our special events taking place all year round."/>
 
     <div className="container mx-auto px-4 py-8">

@@ -6,7 +6,7 @@ const Blog = () => {
   return (
     <>
     <Cover
-    title="DOM Blog"
+    title="DOM BLOG"
     subtitle="Welcome to our blog. Here you'll find the latest updates, teachings, and insights from DOM."/>
 
     <div className="container mx-auto px-4 py-8">

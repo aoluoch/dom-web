@@ -5,7 +5,7 @@ const Contact = () => {
   return (
     <>
     <Cover
-    title="Contact Us"
+    title="CONTACT US"
     subtitle="Get Connected With DOM."/>
 
     <div className="container mx-auto px-4 py-8">

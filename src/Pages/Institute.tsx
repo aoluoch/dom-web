@@ -5,7 +5,7 @@ const Institute = () => {
   return (
     <>
       <Cover 
-        title="DOM Institute"
+        title="DOM INSTITUTE"
         subtitle="Learn more about DOM Institute's educational programs and courses."
       />
       <div className="container mx-auto px-4 py-8">

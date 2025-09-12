@@ -21,7 +21,9 @@ interface FormData {
   town: string;
   level: string;
   church: string;
+  churchService: string;
   ministryArea: string;
+  ministryAreaOther: string;
   ministryIn: string;
   achievements: string;
   specialNeeds: string;
@@ -40,7 +42,9 @@ const Deliverance: React.FC = () => {
     town: '',
     level: '',
     church: '',
+    churchService: '',
     ministryArea: '',
+    ministryAreaOther: '',
     ministryIn: '',
     achievements: '',
     specialNeeds: ''
@@ -48,6 +52,7 @@ const Deliverance: React.FC = () => {
 
   const [showMinistryAreaOther, setShowMinistryAreaOther] = useState(false);
   const [showMinistryInOther, setShowMinistryInOther] = useState(false);
+  const [showMinistryArea, setShowMinistryArea] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -59,6 +64,18 @@ const Deliverance: React.FC = () => {
     }));
 
     // Handle conditional field visibility
+    if (name === 'churchService') {
+      setShowMinistryArea(value === 'yes');
+      // Reset ministry area fields when switching to No
+      if (value === 'no') {
+        setFormData(prev => ({
+          ...prev,
+          ministryArea: '',
+          ministryAreaOther: ''
+        }));
+        setShowMinistryAreaOther(false);
+      }
+    }
     if (name === 'ministryArea') {
       setShowMinistryAreaOther(value === 'other');
     }
@@ -85,7 +102,9 @@ const Deliverance: React.FC = () => {
       formDataToSend.append('town', formData.town);
       formDataToSend.append('level', formData.level);
       formDataToSend.append('church', formData.church);
+      formDataToSend.append('churchService', formData.churchService);
       formDataToSend.append('ministryArea', formData.ministryArea);
+      formDataToSend.append('ministryAreaOther', formData.ministryAreaOther);
       formDataToSend.append('ministryIn', formData.ministryIn);
       formDataToSend.append('achievements', formData.achievements);
       formDataToSend.append('specialNeeds', formData.specialNeeds);
@@ -114,13 +133,16 @@ const Deliverance: React.FC = () => {
           town: '',
           level: '',
           church: '',
+          churchService: '',
           ministryArea: '',
+          ministryAreaOther: '',
           ministryIn: '',
           achievements: '',
           specialNeeds: ''
         });
         setShowMinistryAreaOther(false);
         setShowMinistryInOther(false);
+        setShowMinistryArea(false);
       } else {
         // Handle Formspree errors
         const errorData = await response.json();
@@ -167,6 +189,11 @@ const Deliverance: React.FC = () => {
     { value: 'Worship', label: 'Worship' },
     { value: 'Youth', label: 'Youth' },
     { value: 'other', label: 'Other' }
+  ];
+
+  const churchServiceOptions = [
+    { value: 'yes', label: 'Yes' },
+    { value: 'no', label: 'No' }
   ];
 
   const ministryInOptions = [
@@ -365,13 +392,26 @@ const Deliverance: React.FC = () => {
                 {/* Ministry Information */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <SelectField
-                    label="Do you currently serve in your church? If Yes, in which department?"
-                    name="ministryArea"
-                    options={ministryAreaOptions}
+                    label="Do you currently serve in your church?"
+                    name="churchService"
+                    options={churchServiceOptions}
                     placeholder="Please select one:"
-                    value={formData.ministryArea}
+                    required
+                    value={formData.churchService}
                     onChange={handleInputChange}
                   />
+                  
+                  {showMinistryArea && (
+                    <SelectField
+                      label="In which department do you serve?"
+                      name="ministryArea"
+                      options={ministryAreaOptions}
+                      placeholder="Please select one:"
+                      required
+                      value={formData.ministryArea}
+                      onChange={handleInputChange}
+                    />
+                  )}
                   
                   {showMinistryAreaOther && (
                     <FormField
@@ -379,7 +419,8 @@ const Deliverance: React.FC = () => {
                       name="ministryAreaOther"
                       type="text"
                       placeholder="Enter ministry area here"
-                      value=""
+                      required
+                      value={formData.ministryAreaOther}
                       onChange={handleInputChange}
                     />
                   )}
