@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Building2, Phone, AtSign } from 'lucide-react';
+import PayPalDonation from './PayPalDonation';
 
 type ContactFormData = {
   name: string;
@@ -29,6 +30,7 @@ const ContactComponent: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
   const [submitAttempted, setSubmitAttempted] = useState(false);
+  const [donationAmount, setDonationAmount] = useState('25.00');
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -101,6 +103,16 @@ const ContactComponent: React.FC = () => {
     const fieldName = name as keyof ContactFormData;
     const fieldError = validateField(fieldName, formData[fieldName]);
     setErrors((prev) => ({ ...prev, [fieldName]: fieldError }));
+  };
+
+  const handlePayPalSuccess = (details: unknown) => {
+    console.log('Donation successful:', details);
+    alert('Thank you for your donation! Your contribution helps support our ministry.');
+  };
+
+  const handlePayPalError = (error: unknown) => {
+    console.error('PayPal donation error:', error);
+    alert('There was an error processing your donation. Please try again or contact us directly.');
   };
 
   const validateForm = (data: ContactFormData) => {
@@ -308,6 +320,36 @@ const ContactComponent: React.FC = () => {
                       </p>
                     )}
                   </div>
+
+                  {/* PayPal Donation Section - Only show when "Giving/Making a donation" is selected */}
+                  {formData.topic === 'Giving/Making a donation' && (
+                    <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+                      <div className="mb-4">
+                        <label htmlFor="donationAmount" className="mb-2 block text-sm font-medium text-gray-700">
+                          Donation Amount (USD)
+                        </label>
+                        <div className="flex items-center space-x-2">
+                          <span className="text-gray-500">$</span>
+                          <input
+                            id="donationAmount"
+                            type="number"
+                            min="1"
+                            step="0.01"
+                            value={donationAmount}
+                            onChange={(e) => setDonationAmount(e.target.value)}
+                            className="h-10 w-32 rounded-md border border-gray-300 px-3 text-gray-900 focus:border-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900"
+                            placeholder="25.00"
+                          />
+                        </div>
+                      </div>
+                      <PayPalDonation
+                        amount={donationAmount}
+                        currency="USD"
+                        onSuccess={handlePayPalSuccess}
+                        onError={handlePayPalError}
+                      />
+                    </div>
+                  )}
 
                   <button
                     type="submit"
