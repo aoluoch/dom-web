@@ -25,6 +25,7 @@ interface FormData {
   ministryArea: string;
   ministryAreaOther: string;
   ministryIn: string;
+  ministryInOther: string;
   achievements: string;
   specialNeeds: string;
 }
@@ -46,6 +47,7 @@ const Deliverance: React.FC = () => {
     ministryArea: '',
     ministryAreaOther: '',
     ministryIn: '',
+    ministryInOther: '',
     achievements: '',
     specialNeeds: ''
   });
@@ -106,6 +108,7 @@ const Deliverance: React.FC = () => {
       formDataToSend.append('ministryArea', formData.ministryArea);
       formDataToSend.append('ministryAreaOther', formData.ministryAreaOther);
       formDataToSend.append('ministryIn', formData.ministryIn);
+      formDataToSend.append('ministryInOther', formData.ministryInOther);
       formDataToSend.append('achievements', formData.achievements);
       formDataToSend.append('specialNeeds', formData.specialNeeds);
 
@@ -137,6 +140,7 @@ const Deliverance: React.FC = () => {
           ministryArea: '',
           ministryAreaOther: '',
           ministryIn: '',
+          ministryInOther: '',
           achievements: '',
           specialNeeds: ''
         });
@@ -440,7 +444,8 @@ const Deliverance: React.FC = () => {
                       name="ministryInOther"
                       type="text"
                       placeholder="Enter ministry here"
-                      value=""
+                      required
+                      value={formData.ministryInOther}
                       onChange={handleInputChange}
                     />
                   )}
