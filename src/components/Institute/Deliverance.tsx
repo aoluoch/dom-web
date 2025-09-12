@@ -179,14 +179,14 @@ const Deliverance: React.FC = () => {
   ];
 
   const ministryAreaOptions = [
-    { value: 'Administration', label: 'Administration' },
-    { value: 'Children', label: 'Children' },
-    { value: 'Intercessory', label: 'Intercessory' },
+    { value: 'Administration Team', label: 'Administration Team' },
+    { value: 'Praise & Worship Team', label: 'Praise & Worship Team' },
+    { value: 'Counselling Team', label: 'Counselling Team' },
     { value: 'Men\'s', label: 'Men\'s' },
     { value: 'Women\'s', label: 'Women\'s' },
     { value: 'Protocol', label: 'Protocol' },
     { value: 'Ushering', label: 'Ushering' },
-    { value: 'Worship', label: 'Worship' },
+    { value: 'Technical, Information Technology & Media Team', label: 'Technical, Information Technology & Media Team' },
     { value: 'Youth', label: 'Youth' },
     { value: 'other', label: 'Other' }
   ];
