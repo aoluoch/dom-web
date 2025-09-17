@@ -5,7 +5,7 @@ interface CoverProps {
 
 const Cover = ({ title, subtitle }: CoverProps) => {
   return (
-    <div className="relative h-[400px] w-full overflow-hidden">
+    <div className="relative h-[600px] w-full overflow-hidden">
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"

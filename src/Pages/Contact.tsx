@@ -1,12 +1,17 @@
-import Cover from "../components/Cover"
+import CoverImage from "../components/CoverImage"
 import ContactComponent from "../components/ContactComponent"
 
 const Contact = () => {
   return (
     <>
-    <Cover
-    title="CONTACT US"
-    subtitle="Get Connected With DOM."/>
+    <CoverImage
+      title="CONTACT US"
+      subtitle="Get Connected With DOM."
+      images={[
+        "https://live.staticflickr.com/65535/54793372489_f91cbd829a_z.jpg",
+        "https://live.staticflickr.com/65535/54793389428_94eb659585_z.jpg",
+      ]}
+    />
 
     <div className="container mx-auto px-4 py-8">
       <ContactComponent />
