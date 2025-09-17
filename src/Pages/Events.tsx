@@ -1,13 +1,17 @@
-import Cover from "../components/Cover"
+import CoverImage from "../components/CoverImage"
 import EventComponent from "../components/EventComponent"
 
 
 const Events = () => {
   return (
     <>
-    <Cover
+    <CoverImage
     title="EVENTS"
-    subtitle="Join us at any of our special events taking place all year round."/>
+    subtitle="Join us at any of our special events taking place all year round."
+    images={[
+      "https://live.staticflickr.com/65535/54793138791_193e31bb51_z.jpg",
+    ]}
+  />
 
     <div className="container mx-auto px-4 py-8">
       <div className="text-center mb-8">
