@@ -9,7 +9,8 @@ const Events = () => {
     title="EVENTS"
     subtitle="Join us at any of our special events taking place all year round."
     images={[
-      "https://live.staticflickr.com/65535/54793138791_193e31bb51_z.jpg",
+      "https://live.staticflickr.com/65535/54824400001_b8ac6d57e4_z.jpg",
+      "https://live.staticflickr.com/65535/54824735980_66e8c5fae1_z.jpg"
     ]}
   />
 
