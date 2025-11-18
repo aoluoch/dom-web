@@ -10,7 +10,7 @@ const About = () => {
     title="ABOUT DOM"
     subtitle="DOM International is an Interdenominational organization."
     images={[
-      "https://live.staticflickr.com/65535/54793396973_6a0babd535_z.jpg",
+      "https://live.staticflickr.com/65535/54932840735_8ba5b1a927_z.jpg",
       "https://live.staticflickr.com/65535/54793397023_830c06d994_z.jpg",
     ]}
   />

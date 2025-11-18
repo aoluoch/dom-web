@@ -6,13 +6,13 @@ const Events = () => {
   return (
     <>
     <CoverImage
-    title="EVENTS"
-    subtitle="Join us at any of our special events taking place all year round."
-    images={[
-      "https://live.staticflickr.com/65535/54824400001_b8ac6d57e4_z.jpg",
-      "https://live.staticflickr.com/65535/54824735980_66e8c5fae1_z.jpg"
-    ]}
-  />
+        title="EVENTS"
+        subtitle="Join us at any of our special events taking place all year round."
+        images={[
+        "https://live.staticflickr.com/65535/54932535931_b2cf0cd608.jpg",
+        "https://live.staticflickr.com/65535/54932535296_3c27009822_z.jpg"
+        ]}
+    />
 
     <div className="container mx-auto px-4 py-8">
       <div className="text-center mb-8">

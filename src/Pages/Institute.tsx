@@ -1,13 +1,16 @@
-import Cover from "../components/Cover"
+import CoverImage from "../components/CoverImage"
 import DomInstituteComponent from "../components/DomInstituteComponent"
 
 const Institute = () => {
   return (
     <>
-      <Cover 
+      <CoverImage
         title="DOM INSTITUTE"
         subtitle="Learn more about DOM Institute's educational programs and courses."
-      />
+        images={[
+        "https://live.staticflickr.com/65535/54932783004_c9d54a4166_z.jpg",
+        ]}
+    />
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Educational Programs</h2>
