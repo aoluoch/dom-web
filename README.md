@@ -226,7 +226,7 @@ This project is proprietary software belonging to David Owusu Ministries Interna
 
 ## Contact
 
-- **Website**: [DOM International](https://dom-international.org)
+- **Website**: [DOM International](https://davidowusuministries.co.uk/)
 - **Email**: Contact through website contact form
 - **Zoom Services**: Meeting ID 3091650498
 
