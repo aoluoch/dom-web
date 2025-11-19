@@ -182,7 +182,8 @@ const Prophets: React.FC = () => {
         title="School Of Prophets"
         subtitle="Register for our School Of Prophets Programme."
         images={[
-        "https://live.staticflickr.com/65535/54930718652_3868520685_z.jpg",
+        "https://live.staticflickr.com/65535/54934124320_6f2cacda86_z.jpg",
+        "https://live.staticflickr.com/65535/54934065984_0dfab3f8e3_z.jpg"
         ]}
     />
 

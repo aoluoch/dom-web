@@ -7,7 +7,7 @@ import {
   SubmitButton
 } from './FormComponents';
 import { countryOptions } from './countryOptions';
-import Cover from '../Cover';
+import CoverImage from '../CoverImage';
 
 interface FormData {
   title: string;
@@ -211,9 +211,14 @@ const Deliverance: React.FC = () => {
 
   return (
     <>
-    <Cover
+    <CoverImage
         title="School Of Deliverance"
-        subtitle="Register for our School Of Deliverance Programme"/>
+        subtitle="Register for our School Of Deliverance Programme."
+        images={[
+        "https://live.staticflickr.com/65535/54933833716_3c2f65e7f8_z.jpg",
+        ]}
+    />
+
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
