@@ -113,14 +113,14 @@ const Footer = () => {
               <div className="flex items-center space-x-3">
                 <Phone className="w-4 h-4 text-gray-500 flex-shrink-0" />
                 <div className="text-gray-600 text-sm">
-                  Call Us: +44 7588 844 373
+                  Call Us: +44 7411 322637
                 </div>
               </div>
               
               <div className="flex items-center space-x-3">
                 <MessageCircle className="w-4 h-4 text-gray-500 flex-shrink-0" />
                 <div className="text-gray-600 text-sm">
-                  Whatsapp: +254 799 403342
+                  Whatsapp: +254 799 403 242
                 </div>
               </div>
               
