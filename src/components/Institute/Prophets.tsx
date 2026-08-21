@@ -6,6 +6,7 @@ import {
   SubmitButton
 } from './FormComponents';
 import { countryOptions } from './countryOptions';
+import { sendFormEmail } from '../../lib/sendFormEmail';
 import CoverImage from '../CoverImage';
 
 
@@ -71,69 +72,49 @@ const Prophets: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    try {
-      // Create FormData object for Formspree
-      const formDataToSend = new FormData();
-      formDataToSend.append('title', formData.title);
-      formDataToSend.append('firstName', formData.firstName);
-      formDataToSend.append('surname', formData.surname);
-      formDataToSend.append('gender', formData.gender);
-      formDataToSend.append('birthYear', formData.birthYear);
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('countryCode', formData.countryCode);
-      formDataToSend.append('phoneNumber', formData.phoneNumber);
-      formDataToSend.append('town', formData.town);
-      formDataToSend.append('level', formData.level);
-      formDataToSend.append('church', formData.church);
-      formDataToSend.append('ministryArea', formData.ministryArea);
-      formDataToSend.append('ministryAreaOther', formData.ministryAreaOther);
-      formDataToSend.append('ministryIn', formData.ministryIn);
-      formDataToSend.append('ministryInOther', formData.ministryInOther);
+    sendFormEmail({
+      formName: 'School of Prophets Registration Form',
+      subject: `School of Prophets Registration – ${formData.firstName} ${formData.surname}`,
+      fields: [
+        { label: 'Title', value: formData.title },
+        { label: 'First Name', value: formData.firstName },
+        { label: 'Surname', value: formData.surname },
+        { label: 'Gender', value: formData.gender },
+        { label: 'Date of Birth', value: formData.birthYear },
+        { label: 'Email Address', value: formData.email },
+        { label: 'Country Code', value: formData.countryCode },
+        { label: 'Phone Number', value: formData.phoneNumber },
+        { label: 'Location (town)', value: formData.town },
+        { label: 'Level registering for', value: formData.level },
+        { label: 'Church/Ministry attended/supported', value: formData.church },
+        { label: 'Department served in', value: formData.ministryArea },
+        { label: 'Ministry area (other)', value: formData.ministryAreaOther },
+        { label: 'Fivefold Office', value: formData.ministryIn },
+        { label: 'Ministry (other)', value: formData.ministryInOther },
+      ],
+    });
 
-      // Send to Formspree
-      const response = await fetch('https://formspree.io/f/xvgbvrlo', {
-        method: 'POST',
-        body: formDataToSend,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-
-      if (response.ok) {
-        setSubmitted(true);
-        // Reset form data
-        setFormData({
-          title: '',
-          firstName: '',
-          surname: '',
-          gender: '',
-          birthYear: '',
-          email: '',
-          countryCode: '',
-          phoneNumber: '',
-          town: '',
-          level: '',
-          church: '',
-          ministryArea: '',
-          ministryAreaOther: '',
-          ministryIn: '',
-          ministryInOther: ''
-        });
-        setShowMinistryAreaOther(false);
-        setShowMinistryInOther(false);
-      } else {
-        // Handle Formspree errors
-        const errorData = await response.json();
-        console.error('Formspree error:', errorData);
-        throw new Error('Failed to submit registration. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error submitting prophets form:', error);
-      // Show user-friendly error message
-      alert('There was an error submitting your registration. Please try again or contact us directly.');
-    } finally {
-      setIsSubmitting(false);
-    }
+    setSubmitted(true);
+    setFormData({
+      title: '',
+      firstName: '',
+      surname: '',
+      gender: '',
+      birthYear: '',
+      email: '',
+      countryCode: '',
+      phoneNumber: '',
+      town: '',
+      level: '',
+      church: '',
+      ministryArea: '',
+      ministryAreaOther: '',
+      ministryIn: '',
+      ministryInOther: ''
+    });
+    setShowMinistryAreaOther(false);
+    setShowMinistryInOther(false);
+    setIsSubmitting(false);
   };
 
   const titleOptions = [
@@ -231,9 +212,24 @@ const Prophets: React.FC = () => {
               <h3 className="text-xl font-semibold text-gray-900 mb-6">Your Details</h3>
 
               {submitted ? (
-                <div className="rounded-md bg-green-50 p-4 text-green-700 text-center">
-                  <h4 className="text-lg font-semibold mb-2">Registration Successful!</h4>
-                  <p>Thank you for registering for the School of Prophets. We will contact you soon with further details.</p>
+                <div className="rounded-xl border border-green-200 bg-green-50 p-6 text-center">
+                  <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
+                    <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h4 className="mb-2 text-lg font-semibold text-green-800">Your registration is ready to send!</h4>
+                  <p className="text-sm text-green-700">
+                    We&apos;ve opened your email app with your School of Prophets registration pre-filled.
+                    Just press send and we&apos;ll contact you soon with further details.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setSubmitted(false)}
+                    className="mt-4 inline-flex items-center rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-green-700 focus:outline-none"
+                  >
+                    Submit another registration
+                  </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">

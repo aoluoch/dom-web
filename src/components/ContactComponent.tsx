@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Building2, Phone, AtSign } from 'lucide-react';
+import { sendFormEmail } from '../lib/sendFormEmail';
 
 type ContactFormData = {
   name: string;
@@ -49,49 +50,29 @@ const ContactComponent: React.FC = () => {
 
     setIsSubmitting(true);
 
-    try {
-      // Create FormData object for Formspree
-      const formDataToSend = new FormData();
-      formDataToSend.append('name', formData.name);
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('phone', formData.phoneNo);
-      formDataToSend.append('topic', formData.topic);
-      formDataToSend.append('message', formData.message);
+    sendFormEmail({
+      formName: 'Contact Form',
+      subject: `Contact Form Enquiry – ${formData.topic}`,
+      fields: [
+        { label: 'Name', value: formData.name },
+        { label: 'Phone Number', value: formData.phoneNo },
+        { label: 'Email Address', value: formData.email },
+        { label: 'Topic', value: formData.topic },
+        { label: 'Message', value: formData.message },
+      ],
+    });
 
-      // Send to Formspree
-      const response = await fetch('https://formspree.io/f/xyzdbjll', {
-        method: 'POST',
-        body: formDataToSend,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-
-      if (response.ok) {
-        setSubmitted(true);
-        // Reset form data
-        setFormData({
-          name: '',
-          phoneNo: '',
-          email: '',
-          topic: '',
-          message: '',
-        });
-        setErrors({});
-        setSubmitAttempted(false);
-      } else {
-        // Handle Formspree errors
-        const errorData = await response.json();
-        console.error('Formspree error:', errorData);
-        throw new Error('Failed to send message. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      // Show user-friendly error message
-      alert('There was an error sending your message. Please try again or contact us directly.');
-    } finally {
-      setIsSubmitting(false);
-    }
+    setSubmitted(true);
+    setFormData({
+      name: '',
+      phoneNo: '',
+      email: '',
+      topic: '',
+      message: '',
+    });
+    setErrors({});
+    setSubmitAttempted(false);
+    setIsSubmitting(false);
   };
 
   const handleBlur = (
@@ -154,8 +135,24 @@ const ContactComponent: React.FC = () => {
           <div>
             <div className="rounded-2xl border border-gray-200 p-6 shadow-sm">
               {submitted ? (
-                <div className="rounded-md bg-green-50 p-4 text-green-700">
-                  Thank you! Your message has been received.
+                <div className="rounded-xl border border-green-200 bg-green-50 p-6 text-center">
+                  <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
+                    <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h4 className="mb-2 text-lg font-semibold text-green-800">Your message is ready to send!</h4>
+                  <p className="text-sm text-green-700">
+                    We&apos;ve opened your email app with your message pre-filled. Just press send and
+                    we&apos;ll get back to you as soon as possible.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setSubmitted(false)}
+                    className="mt-4 inline-flex items-center rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-green-700 focus:outline-none"
+                  >
+                    Send another message
+                  </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6" noValidate>

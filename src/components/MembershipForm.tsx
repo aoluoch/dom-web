@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { sendFormEmail } from '../lib/sendFormEmail';
 
 type MembershipFormData = {
   fullName: string;
@@ -115,46 +116,26 @@ const MembershipForm: React.FC = () => {
 
     setIsSubmitting(true);
 
-    try {
-      // Create FormData object for Formspree
-      const formDataToSend = new FormData();
-      formDataToSend.append('fullName', formData.fullName);
-      formDataToSend.append('gender', formData.gender);
-      formDataToSend.append('dateOfBirth', formData.dateOfBirth);
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('phoneNo', formData.phoneNo);
-      formDataToSend.append('country', formData.country);
-      formDataToSend.append('city', formData.city);
-      formDataToSend.append('prayerRequest', formData.prayerRequest);
+    sendFormEmail({
+      formName: 'Membership Registration Form',
+      subject: `Membership Registration – ${formData.fullName}`,
+      fields: [
+        { label: 'Full Name', value: formData.fullName },
+        { label: 'Gender', value: formData.gender },
+        { label: 'Date of Birth', value: formData.dateOfBirth },
+        { label: 'Email Address', value: formData.email },
+        { label: 'Phone Number', value: formData.phoneNo },
+        { label: 'Country', value: formData.country },
+        { label: 'City/Town', value: formData.city },
+        { label: 'Prayer Request', value: formData.prayerRequest },
+      ],
+    });
 
-      // Send to Formspree
-      const response = await fetch('https://formspree.io/f/movnpwyz', {
-        method: 'POST',
-        body: formDataToSend,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-
-      if (response.ok) {
-        setSubmitted(true);
-        // Reset form data
-        setFormData(initialFormData);
-        setErrors({});
-        setSubmitAttempted(false);
-      } else {
-        // Handle Formspree errors
-        const errorData = await response.json();
-        console.error('Formspree error:', errorData);
-        throw new Error('Failed to submit membership registration. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error submitting membership form:', error);
-      // Show user-friendly error message
-      alert('There was an error submitting your membership registration. Please try again or contact us directly.');
-    } finally {
-      setIsSubmitting(false);
-    }
+    setSubmitted(true);
+    setFormData(initialFormData);
+    setErrors({});
+    setSubmitAttempted(false);
+    setIsSubmitting(false);
   };
 
   return (
@@ -165,8 +146,24 @@ const MembershipForm: React.FC = () => {
             <h4 className="text-xl font-semibold text-gray-900">Your Details</h4>
             <div className="mt-6 rounded-2xl border border-gray-200 p-6 shadow-sm">
               {submitted ? (
-                <div className="rounded-md bg-green-50 p-4 text-green-700">
-                  Thank you! Your membership registration has been received.
+                <div className="rounded-xl border border-green-200 bg-green-50 p-6 text-center">
+                  <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
+                    <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h4 className="mb-2 text-lg font-semibold text-green-800">Your registration is ready to send!</h4>
+                  <p className="text-sm text-green-700">
+                    We&apos;ve opened your email app with your membership details pre-filled. Simply press
+                    send and our team will welcome you shortly.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setSubmitted(false)}
+                    className="mt-4 inline-flex items-center rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-green-700 focus:outline-none"
+                  >
+                    Register another member
+                  </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6" noValidate>

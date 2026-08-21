@@ -7,6 +7,7 @@ import {
   SubmitButton
 } from './FormComponents';
 import { countryOptions } from './countryOptions';
+import { sendFormEmail } from '../../lib/sendFormEmail';
 import Cover from '../Cover';
 
 interface FormData {
@@ -73,71 +74,51 @@ const Strategic: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    try {
-      // Create FormData object for Formspree
-      const formDataToSend = new FormData();
-      formDataToSend.append('title', formData.title);
-      formDataToSend.append('firstName', formData.firstName);
-      formDataToSend.append('surname', formData.surname);
-      formDataToSend.append('gender', formData.gender);
-      formDataToSend.append('birthYear', formData.birthYear);
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('countryCode', formData.countryCode);
-      formDataToSend.append('phoneNumber', formData.phoneNumber);
-      formDataToSend.append('town', formData.town);
-      formDataToSend.append('financialPlan', formData.financialPlan);
-      formDataToSend.append('planPeriod', formData.planPeriod);
-      formDataToSend.append('documentedStrategicPlan', formData.documentedStrategicPlan);
-      formDataToSend.append('strategicPlanPeriod', formData.strategicPlanPeriod);
-      formDataToSend.append('strategicPlanReview', formData.strategicPlanReview);
-      formDataToSend.append('occupation', formData.occupation);
-      formDataToSend.append('achievements', formData.achievements);
+    sendFormEmail({
+      formName: 'School of Strategic Planning Registration Form',
+      subject: `School of Strategic Planning Registration – ${formData.firstName} ${formData.surname}`,
+      fields: [
+        { label: 'Title', value: formData.title },
+        { label: 'First Name', value: formData.firstName },
+        { label: 'Surname', value: formData.surname },
+        { label: 'Gender', value: formData.gender },
+        { label: 'Date of Birth', value: formData.birthYear },
+        { label: 'Email Address', value: formData.email },
+        { label: 'Country Code', value: formData.countryCode },
+        { label: 'Phone Number', value: formData.phoneNumber },
+        { label: 'Location (town)', value: formData.town },
+        { label: 'Works with a financial plan or budget', value: formData.financialPlan },
+        { label: 'How often finances are tracked', value: formData.planPeriod },
+        { label: 'Has a documented strategic plan', value: formData.documentedStrategicPlan },
+        { label: 'Strategic plan period', value: formData.strategicPlanPeriod },
+        { label: 'How often strategic plan is reviewed', value: formData.strategicPlanReview },
+        { label: 'Current occupation', value: formData.occupation },
+        { label: 'What they would like to achieve', value: formData.achievements },
+      ],
+    });
 
-      // Send to Formspree
-      const response = await fetch('https://formspree.io/f/xrbaokje', {
-        method: 'POST',
-        body: formDataToSend,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-
-      if (response.ok) {
-        setSubmitted(true);
-        // Reset form data
-        setFormData({
-          title: '',
-          firstName: '',
-          surname: '',
-          gender: '',
-          birthYear: '',
-          email: '',
-          countryCode: '',
-          phoneNumber: '',
-          town: '',
-          financialPlan: '',
-          planPeriod: '',
-          documentedStrategicPlan: '',
-          strategicPlanPeriod: '',
-          strategicPlanReview: '',
-          occupation: '',
-          achievements: ''
-        });
-        setShowPlanDiv(false);
-        setShowStrategicDiv(false);
-      } else {
-        // Handle Formspree errors
-        const errorData = await response.json();
-        console.error('Formspree error:', errorData);
-        throw new Error('Failed to submit registration. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error submitting strategic form:', error);
-      // Show user-friendly error message
-      alert('There was an error submitting your registration. Please try again or contact us directly.');
-    } finally {
-      setIsSubmitting(false);
-    }
+    setSubmitted(true);
+    setFormData({
+      title: '',
+      firstName: '',
+      surname: '',
+      gender: '',
+      birthYear: '',
+      email: '',
+      countryCode: '',
+      phoneNumber: '',
+      town: '',
+      financialPlan: '',
+      planPeriod: '',
+      documentedStrategicPlan: '',
+      strategicPlanPeriod: '',
+      strategicPlanReview: '',
+      occupation: '',
+      achievements: ''
+    });
+    setShowPlanDiv(false);
+    setShowStrategicDiv(false);
+    setIsSubmitting(false);
   };
 
   const titleOptions = [
@@ -235,9 +216,24 @@ const Strategic: React.FC = () => {
               <h3 className="text-xl font-semibold text-gray-900 mb-6">Your Details</h3>
 
               {submitted ? (
-                <div className="rounded-md bg-green-50 p-4 text-green-700 text-center">
-                  <h4 className="text-lg font-semibold mb-2">Registration Successful!</h4>
-                  <p>Thank you for registering for the School of Strategic Planning. We will contact you soon with further details.</p>
+                <div className="rounded-xl border border-green-200 bg-green-50 p-6 text-center">
+                  <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
+                    <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h4 className="mb-2 text-lg font-semibold text-green-800">Your registration is ready to send!</h4>
+                  <p className="text-sm text-green-700">
+                    We&apos;ve opened your email app with your School of Strategic Planning registration
+                    pre-filled. Just press send and we&apos;ll contact you soon with further details.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setSubmitted(false)}
+                    className="mt-4 inline-flex items-center rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-green-700 focus:outline-none"
+                  >
+                    Submit another registration
+                  </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
